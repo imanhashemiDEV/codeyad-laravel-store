@@ -1,0 +1,25 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-DL-Qw56t.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/fonts/woff2/FD/Vazir-Bold-FD.woff2": {
+    "file": "assets/Vazir-Bold-FD-B9eaWCwY.woff2",
+    "src": "resources/fonts/woff2/FD/Vazir-Bold-FD.woff2"
+  },
+  "resources/fonts/woff2/FD/Vazir-FD.woff2": {
+    "file": "assets/Vazir-FD-B7LGjZzS.woff2",
+    "src": "resources/fonts/woff2/FD/Vazir-FD.woff2"
+  },
+  "resources/fonts/woff2/FD/Vazir-Light-FD.woff2": {
+    "file": "assets/Vazir-Light-FD-BedC0j2e.woff2",
+    "src": "resources/fonts/woff2/FD/Vazir-Light-FD.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BjCBnTiP.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}

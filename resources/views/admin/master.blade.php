@@ -8,7 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="{{url('panel/images/favicon.png')}}" />
     <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/perfect-scrollbar.min.css')}}" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}" />
+
+{{--    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}" />--}}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url('tailwind/assets/app-DL-Qw56t.css')}}" />
+
     <link defer rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/animate.css')}}" />
     <script src="{{url('panel/js/perfect-scrollbar.min.js')}}"></script>
     <script defer src="{{url('panel/js/popper.min.js')}}"></script>
@@ -18,7 +21,7 @@
 
 <body
     x-data="main"
-    class="relative overflow-x-hidden text-sm antialiased font-normal font-vazir font-nunito"
+    class="relative overflow-x-hidden text-sm antialiased font-normal font-vazir font-nunito bg-indigo-500"
     :class="  [ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme, $store.app.menu, $store.app.layout,$store.app.rtlClass]"
 >
 <!-- sidebar menu overlay -->
