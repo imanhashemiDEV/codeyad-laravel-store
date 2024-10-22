@@ -20,3 +20,4 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/admin', \App\Livewire\Admin\Panel::class)->name('panel');
+Route::get('/admin/users', \App\Livewire\Admin\Users\UserList::class)->name('admin.users.list');
