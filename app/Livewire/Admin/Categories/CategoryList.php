@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Admin\Categories;
 
-use App\Models\User;
+use App\Models\Category;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -18,26 +19,23 @@ class CategoryList extends Component
     use WithPagination;
     #[Validate('required')]
     public $name;
-    #[Validate('nullable|unique:users,email')]
-    public $email;
-    #[Validate('nullable|unique:users,mobile')]
-    public $mobile;
-    #[Validate('required|min:6')]
-    public $password;
+    #[Validate('nullable|mimes:jpeg,jpg,png')]
+    public $image;
+    public $parent_id;
 
     public $editIndex;
 
     public function createRow(): void
     {
         $this->validate();
-        User::query()->create([
+        Category::query()->create([
             'name' => $this->name,
-            'email' => $this->email,
-            'mobile' => $this->mobile,
-            'password' => Hash::make($this->password),
+            'slug' => "",
+            'image' => "",
+            'parent_id' => $this->parent_id,
         ]);
 
-        session()->flash('success', 'کاربر ایجاد شد');
+        session()->flash('success', 'دسته بندی ایجاد شد');
         $this->reset();
 
     }
@@ -45,39 +43,35 @@ class CategoryList extends Component
     public function editRow($id)
     {
         $this->editIndex = $id;
-        $user = User::query()->findOrFail($id);
-        $this->name = $user->name;
-        $this->email = $user->email;
-        $this->mobile = $user->mobile;
+        $category = Category::query()->findOrFail($id);
+        $this->name = $category->name;
+        $this->image = $category->image;
+        $this->parent_id = $category->parent_id;
     }
 
     public function updateRow()
     {
-        $this->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email,'.$this->editIndex,
-            'mobile' => 'required|unique:users,mobile,'.$this->editIndex,
-        ]);
-        $user = User::query()->findOrFail($this->editIndex);
-        $user->update([
+        $this->validate();
+        $category = Category::query()->findOrFail($this->editIndex);
+        $category->update([
             'name' => $this->name,
             'email' => $this->email,
             'mobile' => $this->mobile,
-            'password' => $this->password ? Hash::make($this->password) : $user->password,
+            'password' => $this->password ? Hash::make($this->password) : $category->password,
         ]);
 
-        session()->flash('success', 'کاربر ویرایش شد');
+        session()->flash('success', 'دسته بندی ویرایش شد');
         $this->reset();
     }
 
     #[Computed()]
-    public function users():Paginator
+    public function categories():Paginator
     {
-        return User::query()->paginate(10);
+        return Category::query()->paginate(10);
     }
 
-    #[Layout('admin.master'),Title('لیست کاربران')]
-    public function render()
+    #[Layout('admin.master'),Title('لیست دسته بندی ها')]
+    public function render():View
     {
         return view('livewire.admin.categories.category-list');
     }

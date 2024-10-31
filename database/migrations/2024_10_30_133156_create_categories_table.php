@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('status')->default(\App\Enums\CategoryStatus::Active->value);
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
