@@ -11,12 +11,13 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class CategoryList extends Component
 {
 
-    use WithPagination;
+    use WithPagination , WithFileUploads;
     #[Validate('required')]
     public $name;
     #[Validate('nullable|mimes:jpeg,jpg,png')]
@@ -28,10 +29,17 @@ class CategoryList extends Component
     public function createRow(): void
     {
         $this->validate();
+
+        if($this->image){
+            $image = $this->image->hashName();
+            $this->image->storeAs('images/categories/', $image,'public');
+        }
+
+
         Category::query()->create([
             'name' => $this->name,
-            'slug' => "",
-            'image' => "",
+            'slug' => make_slug($this->name),
+            'image' => $this->image ? $image : null,
             'parent_id' => $this->parent_id,
         ]);
 
@@ -73,6 +81,7 @@ class CategoryList extends Component
     #[Layout('admin.master'),Title('لیست دسته بندی ها')]
     public function render():View
     {
-        return view('livewire.admin.categories.category-list');
+        $categories = Category::query()->pluck('name', 'id');
+        return view('livewire.admin.categories.category-list', compact('categories'));
     }
 }

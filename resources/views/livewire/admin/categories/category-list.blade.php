@@ -15,12 +15,12 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="email">ایمیل</label>
+                        <label for="email">دسته بندی پدر</label>
                         <select  wire:model="parent_id" id="ctnSelect1" class="form-select text-white-dark">
-                            <option>این منوی انتخابی را باز کنید</option>
-                            <option>یک</option>
-                            <option>دو</option>
-                            <option>سه</option>
+                            <option>دسته بندی اصلی</option>
+                            @foreach($categories as $key=>$value)
+                                <option value="{{$key}}">{{$value}}</option>
+                            @endforeach
                         </select>
                         @error('parent_id')
                         <p class="text-danger mt-1">{{$message}}</p>
@@ -51,6 +51,7 @@
                     <thead>
                     <tr>
                         <th class="text-center">ردیف</th>
+                        <th class="text-center">عکس</th>
                         <th class="text-center">نام دسته بندی</th>
                         <th class="text-center">دسته بندی پدر</th>
                         <th class="text-center">تاریخ دسته بندی</th>
@@ -61,8 +62,11 @@
                     @foreach($this->categories as $index => $category)
                         <tr>
                             <td>{{$this->categories->firstItem() + $index }}</td>
+                            <td>
+                                <img src="{{url('images/categories/'.$category->image)}}" alt="image" class="object-cover w-24 h-24 mb-5 rounded-full">
+                            </td>
                             <td class="whitespace-nowrap">{{$category->name}}</td>
-                            <td class="whitespace-nowrap">{{$category->parent_id}}</td>
+                            <td class="whitespace-nowrap">{{$category->parentCategory->name}}</td>
                             <td class="whitespace-nowrap">{{$category->created_at}}</td>
                             <td class="border-b border-[#ebedf2] p-3 text-center dark:border-[#191e3a]">
                                 <button wire:click="editRow({{$category->id}})" type="button" x-tooltip="Edit">
