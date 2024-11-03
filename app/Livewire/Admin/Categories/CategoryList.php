@@ -48,24 +48,28 @@ class CategoryList extends Component
 
     }
 
-    public function editRow($id)
+    public function editRow($id): void
     {
         $this->editIndex = $id;
         $category = Category::query()->findOrFail($id);
         $this->name = $category->name;
-        $this->image = $category->image;
         $this->parent_id = $category->parent_id;
     }
 
-    public function updateRow()
+    public function updateRow(): void
     {
+        if($this->image){
+            $image = $this->image->hashName();
+            $this->image->storeAs('images/categories/', $image,'public');
+        }
+
         $this->validate();
         $category = Category::query()->findOrFail($this->editIndex);
         $category->update([
             'name' => $this->name,
-            'email' => $this->email,
-            'mobile' => $this->mobile,
-            'password' => $this->password ? Hash::make($this->password) : $category->password,
+            'slug' => make_slug($this->name),
+            'image' => $this->image ? $image : $category->image,
+            'parent_id' =>  $this->parent_id,
         ]);
 
         session()->flash('success', 'دسته بندی ویرایش شد');
@@ -81,7 +85,8 @@ class CategoryList extends Component
     #[Layout('admin.master'),Title('لیست دسته بندی ها')]
     public function render():View
     {
-        $categories = Category::query()->pluck('name', 'id');
+//        $categories = Category::query()->pluck('name', 'id');
+        $categories = Category::getCategories();
         return view('livewire.admin.categories.category-list', compact('categories'));
     }
 }

@@ -26,5 +26,19 @@ class Category extends Model
         return $this->hasMany(self::class, 'parent_id','id');
     }
 
+    public static function getCategories()
+    {
+       $array=[];
+       $categories = self::query()->with('childCategory')->where('parent_id',null)->get();
+       foreach ($categories as $category1) {
+           $array[$category1->id] = $category1->name;
+           foreach ($category1->childCategory as $category2) {
+               $array[$category2->id] = ' - ' .$category2->name;
+           }
+       }
+
+       return $array;
+    }
+
 
 }
