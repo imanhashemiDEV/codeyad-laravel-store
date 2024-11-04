@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -79,7 +80,13 @@ class CategoryList extends Component
     #[Computed()]
     public function categories():Paginator
     {
-        return Category::query()->paginate(10);
+        return Category::query()->with('parentCategory')->paginate(10);
+    }
+
+    #[On('destroy-category')]
+    public function destroyRow($category_id): void
+    {
+        Category::destroy($category_id);
     }
 
     #[Layout('admin.master'),Title('لیست دسته بندی ها')]
