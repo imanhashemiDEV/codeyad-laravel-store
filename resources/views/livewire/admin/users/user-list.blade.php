@@ -1,7 +1,8 @@
 <div class="grid grid-cols-1 gap-6 p-4">
     <div class="panel p-5">
 
-       @include('admin.layouts.alert')
+        @include('admin.layouts.alert')
+        @include('admin.layouts.waiting')
 
         <div class="mb-5">
             <h1 class="m-4 text-xl font-semibold">ایجاد کاربر</h1>
@@ -48,6 +49,12 @@
     </div>
     <div class="panel p-5">
         <div class="mb-5">
+            <div class="flex flex-1 mb-4">
+                <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                    جستجو
+                </div>
+                <input wire:model="search" @keyup.enter="$wire.searchData" type="text" class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+            </div>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -75,23 +82,6 @@
                                             stroke="currentColor" stroke-width="1.5"></path>
                                         <path opacity="0.5"
                                               d="M14.36 4.07812C14.36 4.07812 14.4759 6.04774 16.2138 7.78564C17.9517 9.52354 19.9213 9.6394 19.9213 9.6394M4.19789 21.6777L2.32178 19.8015"
-                                              stroke="currentColor" stroke-width="1.5"></path>
-                                    </svg>
-                                </button>
-                                <button type="button" x-tooltip="Delete">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-rose-500">
-                                        <path d="M20.5001 6H3.5" stroke="currentColor" stroke-width="1.5"
-                                              stroke-linecap="round"></path>
-                                        <path
-                                            d="M18.8334 8.5L18.3735 15.3991C18.1965 18.054 18.108 19.3815 17.243 20.1907C16.378 21 15.0476 21 12.3868 21H11.6134C8.9526 21 7.6222 21 6.75719 20.1907C5.89218 19.3815 5.80368 18.054 5.62669 15.3991L5.16675 8.5"
-                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        <path opacity="0.5" d="M9.5 11L10 16" stroke="currentColor" stroke-width="1.5"
-                                              stroke-linecap="round"></path>
-                                        <path opacity="0.5" d="M14.5 11L14 16" stroke="currentColor" stroke-width="1.5"
-                                              stroke-linecap="round"></path>
-                                        <path opacity="0.5"
-                                              d="M6.5 6C6.55588 6 6.58382 6 6.60915 5.99936C7.43259 5.97849 8.15902 5.45491 8.43922 4.68032C8.44784 4.65649 8.45667 4.62999 8.47434 4.57697L8.57143 4.28571C8.65431 4.03708 8.69575 3.91276 8.75071 3.8072C8.97001 3.38607 9.37574 3.09364 9.84461 3.01877C9.96213 3 10.0932 3 10.3553 3H13.6447C13.9068 3 14.0379 3 14.1554 3.01877C14.6243 3.09364 15.03 3.38607 15.2493 3.8072C15.3043 3.91276 15.3457 4.03708 15.4286 4.28571L15.5257 4.57697C15.5433 4.62992 15.5522 4.65651 15.5608 4.68032C15.841 5.45491 16.5674 5.97849 17.3909 5.99936C17.4162 6 17.4441 6 17.5 6"
                                               stroke="currentColor" stroke-width="1.5"></path>
                                     </svg>
                                 </button>

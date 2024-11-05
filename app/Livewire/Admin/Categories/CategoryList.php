@@ -24,7 +24,7 @@ class CategoryList extends Component
     #[Validate('nullable|mimes:jpeg,jpg,png')]
     public $image;
     public $parent_id;
-
+    public $search;
     public $editIndex;
 
     public function createRow(): void
@@ -87,6 +87,13 @@ class CategoryList extends Component
     public function destroyRow($category_id): void
     {
         Category::destroy($category_id);
+    }
+
+    public function searchData(): void
+    {
+        $this->categories = Category::query()
+            ->where('name', 'like', '%'.$this->search.'%')
+            ->with('parentCategory')->paginate(10);
     }
 
     #[Layout('admin.master'),Title('لیست دسته بندی ها')]
