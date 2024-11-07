@@ -76,6 +76,9 @@
                         <li>
                             <a href="{{route('admin.categories.list')}}">دسته بندی ها</a>
                         </li>
+                        <li>
+                            <a href="{{route('admin.brands.list')}}">برند ها</a>
+                        </li>
                         <!-- here -->
                     </ul>
                 </li>

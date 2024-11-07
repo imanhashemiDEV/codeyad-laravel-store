@@ -19,7 +19,7 @@ class CategoryList extends Component
 {
 
     use WithPagination , WithFileUploads;
-    #[Validate('required')]
+    #[Validate('required|unique:categories,name')]
     public $name;
     #[Validate('nullable|mimes:jpeg,jpg,png')]
     public $image;
