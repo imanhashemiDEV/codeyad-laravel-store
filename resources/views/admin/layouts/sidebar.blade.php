@@ -79,6 +79,9 @@
                         <li>
                             <a href="{{route('admin.brands.list')}}">برند ها</a>
                         </li>
+                        <li>
+                            <a href="{{route('admin.colors.list')}}">رنگ ها</a>
+                        </li>
                         <!-- here -->
                     </ul>
                 </li>
