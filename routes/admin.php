@@ -5,6 +5,7 @@ use App\Livewire\Admin\Brands\BrandList;
 use App\Livewire\Admin\Categories\CategoryList;
 use App\Livewire\Admin\Categories\TrashedCategoryList;
 use App\Livewire\Admin\Colors\ColorList;
+use App\Livewire\Admin\Guaranties\GuarantyList;
 use App\Livewire\Admin\Panel;
 use App\Livewire\Admin\Users\UserList;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,6 @@ Route::get('/brands', BrandList::class)->name('admin.brands.list');
 
 //--- colors ---//
 Route::get('/colors', ColorList::class)->name('admin.colors.list');
+
+//--- guaranties ---//
+Route::get('/guaranties', GuarantyList::class)->name('admin.guaranties.list');
