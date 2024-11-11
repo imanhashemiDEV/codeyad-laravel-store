@@ -12,4 +12,9 @@ class Brand extends Model
         'image',
         'status',
     ];
+
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+       return $this->hasMany(Product::class);
+    }
 }
