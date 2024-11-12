@@ -85,6 +85,9 @@
                         <li>
                             <a href="{{route('admin.guaranties.list')}}">گارانتی ها</a>
                         </li>
+                        <li>
+                            <a href="{{route('admin.products.list')}}">محصول ها</a>
+                        </li>
                         <!-- here -->
                     </ul>
                 </li>
