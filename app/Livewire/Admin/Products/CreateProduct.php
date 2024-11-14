@@ -33,8 +33,8 @@ class CreateProduct extends Component
 
     public function createRow(): void
     {
-        $this->validate();
-
+      //  $this->validate();
+        dd($this->category_id, $this->brand_id,$this->description);
         if($this->image){
             $image = $this->image->hashName();
             $this->image->storeAs('images/products/', $image,'public');

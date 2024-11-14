@@ -62,7 +62,6 @@
 {{--<script defer src="{{url('panel/js/alpine-focus.min.js')}}"></script>--}}
 {{--<script defer src="{{url('panel/js/alpine.min.js')}}"></script>--}}
 <script src="{{url('panel/js/custom.js')}}"></script>
-<script defer src="{{url('panel/js/apexcharts.js')}}"></script>
 <script>
     // main section
     document.addEventListener('alpine:init', () => {
