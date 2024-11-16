@@ -2,43 +2,42 @@
 
 namespace App\Livewire\Admin\Products;
 
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class ProductList extends Component
 {
     use WithPagination;
 
-
     public $search;
 
-
     #[Computed()]
-    public function categories():Paginator
+    public function products():Paginator
     {
-        return Category::query()->with('parentCategory')->paginate(10);
+        return Product::query()
+            ->with('category','brand')
+            ->paginate(10);
     }
 
-    #[On('destroy-category')]
-    public function destroyRow($category_id): void
+    #[On('destroy-product')]
+    public function destroyRow($product_id): void
     {
-        Category::destroy($category_id);
+        Product::destroy($product_id);
     }
 
     public function searchData(): void
     {
-        $this->categories = Category::query()
+        $this->products = Product::query()
             ->where('name', 'like', '%'.$this->search.'%')
-            ->with('parentCategory')->paginate(10);
+            ->with('category','brand')
+            ->paginate(10);
     }
 
     #[Layout('admin.master'),Title('لیست محصولات')]
