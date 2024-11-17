@@ -50,7 +50,7 @@
                         <p class="text-danger mt-1">{{$message}}</p>
                         @enderror
                     </div>
-                    <div>
+                    <div wire:ignore>
                         <label for="category_id">دسته بندی</label>
                         <select  wire:model="category_id" id="category-select">
                             <option>انتخاب کنید</option>
@@ -62,7 +62,7 @@
                         <p class="text-danger mt-1">{{$message}}</p>
                         @enderror
                     </div>
-                    <div>
+                    <div wire:ignore>
                         <label for="brand_id">برند</label>
                         <select  wire:model="brand_id" id="brand-select">
                             <option>انتخاب کنید</option>
@@ -81,7 +81,7 @@
                         <p class="text-danger mt-1">{{$message}}</p>
                         @enderror
                     </div>
-                    <div>
+                    <div wire:ignore>
                         <label for="description">توضیحات محصول</label>
                         <textarea wire:model="description" id="editor" rows="3" class="form-textarea"></textarea>
                         @error('description')
