@@ -10,6 +10,7 @@ use App\Livewire\Admin\Panel;
 use App\Livewire\Admin\Products\CreateProduct;
 use App\Livewire\Admin\Products\EditProduct;
 use App\Livewire\Admin\Products\ProductList;
+use App\Livewire\Admin\Products\ProductPrices;
 use App\Livewire\Admin\Users\UserList;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +37,4 @@ Route::get('/guaranties', GuarantyList::class)->name('admin.guaranties.list');
 Route::get('/products', ProductList::class)->name('admin.products.list');
 Route::get('/create_product', CreateProduct::class)->name('admin.create.product');
 Route::get('/edit_product/{product}', EditProduct::class)->name('admin.edit.product');
+Route::get('/product_prices/{product}', ProductPrices::class)->name('admin.product.prices');
