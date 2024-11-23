@@ -38,3 +38,4 @@ Route::get('/products', ProductList::class)->name('admin.products.list');
 Route::get('/create_product', CreateProduct::class)->name('admin.create.product');
 Route::get('/edit_product/{product}', EditProduct::class)->name('admin.edit.product');
 Route::get('/product_prices/{product}', ProductPrices::class)->name('admin.product.prices');
+Route::get('/create_product_prices/{product}', ProductPrices::class)->name('admin.create.product.prices');
