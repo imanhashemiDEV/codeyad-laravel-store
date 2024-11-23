@@ -34,6 +34,7 @@
                         <th class="text-center">قیمت</th>
                         <th class="text-center">دسته بندی</th>
                         <th class="text-center">برند</th>
+                        <th class="text-center">تنوع قیمت</th>
                         <th class="text-center">تاریخ ایجاد</th>
                         <th class="text-center">عملیات</th>
                     </tr>
@@ -49,6 +50,9 @@
                             <td class="whitespace-nowrap">{{$product->price}}</td>
                             <td class="whitespace-nowrap">{{$product->category->name}}</td>
                             <td class="whitespace-nowrap">{{$product->brand->name}}</td>
+                            <td class="whitespace-nowrap flex justify-center">
+                                <a href="{{route('admin.product.prices',$product->id)}}" class="btn btn-outline-info">تنوع قیمت</a>
+                            </td>
                             <td class="whitespace-nowrap">{{ \Hekmatinasser\Verta\Verta::instance($product->created_at)->formatJalaliDate()}}</td>
                             <td class="flex items-center justify-center  p-3 text-center">
                                 <a href="{{route('admin.edit.product',$product->id)}}" class="m-4" x-tooltip="ویرایش">

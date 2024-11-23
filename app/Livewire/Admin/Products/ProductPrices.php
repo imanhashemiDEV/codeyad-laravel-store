@@ -3,7 +3,9 @@
 namespace App\Livewire\Admin\Products;
 
 use App\Models\Product;
+use App\Models\ProductPrice;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -15,32 +17,30 @@ class ProductPrices extends Component
 {
     use WithPagination;
 
-    public $search;
+    public $product;
+
+    public function mount(Product $product): void
+    {
+        $this->product = $product;
+    }
 
     #[Computed()]
-    public function products():Paginator
+    public function productPrices():Paginator
     {
-        return Product::query()
-            ->with('category','brand')
+        return ProductPrice::query()
+            ->where('product_id',$this->product->id)
             ->paginate(10);
     }
 
-    #[On('destroy-product')]
-    public function destroyRow($product_id): void
+    #[On('destroy-product-price')]
+    public function destroyRow($product_price_id): void
     {
-        Product::destroy($product_id);
+        ProductPrice::destroy($product_price_id);
     }
 
-    public function searchData(): void
-    {
-        $this->products = Product::query()
-            ->where('name', 'like', '%'.$this->search.'%')
-            ->with('category','brand')
-            ->paginate(10);
-    }
 
-    #[Layout('admin.master'),Title('لیست محصولات')]
-    public function render()
+    #[Layout('admin.master'),Title('لیست تنوع محصول')]
+    public function render():View
     {
         return view('livewire.admin.products.product-prices');
     }

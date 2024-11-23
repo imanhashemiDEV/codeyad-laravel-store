@@ -14,13 +14,6 @@
         </div>
         <div class="mb-5">
 
-            <div class="flex flex-1 mb-4">
-                <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                    جستجو
-                </div>
-                <input wire:model="search" @keyup.enter="$wire.searchData" type="text" class="form-input ltr:rounded-l-none rtl:rounded-r-none">
-            </div>
-
             @include('admin.layouts.alert')
             @include('admin.layouts.waiting')
 
@@ -29,27 +22,35 @@
                     <thead>
                     <tr>
                         <th class="text-center">ردیف</th>
-                        <th class="text-center">عکس</th>
-                        <th class="text-center">نام محصول</th>
                         <th class="text-center">قیمت</th>
-                        <th class="text-center">دسته بندی</th>
-                        <th class="text-center">برند</th>
+                        <th class="text-center">تخفیف</th>
+                        <th class="text-center">تعداد</th>
+                        <th class="text-center">رنگ</th>
+                        <th class="text-center">گارانتی</th>
+                        <th class="text-center">وضعیت</th>
                         <th class="text-center">تاریخ ایجاد</th>
                         <th class="text-center">عملیات</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($this->products as $index => $product)
+                    @foreach($this->productPrices as $index => $productPrice)
                         <tr>
-                            <td>{{$this->products->firstItem() + $index }}</td>
-                            <td class="whitespace-nowrap flex items-center justify-center">
-                                <img src="{{url('images/products/'.$product->image)}}" alt="image" class="object-cover w-12 h-12 mb-5 rounded-full">
+                            <td>{{$this->productPrices->firstItem() + $index }}</td>
+                            <td class="whitespace-nowrap">{{$productPrice->price}}</td>
+                            <td class="whitespace-nowrap">{{$productPrice->discount}}</td>
+                            <td class="whitespace-nowrap">{{$productPrice->count}}</td>
+                            <td class="whitespace-nowrap">{{$productPrice->color->name}}</td>
+                            <td class="whitespace-nowrap">{{$productPrice->guaranty->name}}</td>
+                            <td class="whitespace-nowrap">
+                                @if($productPrice->status == \App\Enums\ProductStatus::Active->value )
+                                    <span class="badge bg-success">فعال</span>
+                                @elseif($productPrice->status == \App\Enums\ProductStatus::Inactive->value )
+                                    <span class="badge bg-success">غیرفعال</span>
+                                @elseif($productPrice->status == \App\Enums\ProductStatus::Banned->value )
+                                    <span class="badge bg-success">بن شده</span>
+                                @endif
                             </td>
-                            <td class="whitespace-nowrap">{{$product->name}}</td>
-                            <td class="whitespace-nowrap">{{$product->price}}</td>
-                            <td class="whitespace-nowrap">{{$product->category->name}}</td>
-                            <td class="whitespace-nowrap">{{$product->brand->name}}</td>
-                            <td class="whitespace-nowrap">{{ \Hekmatinasser\Verta\Verta::instance($product->created_at)->formatJalaliDate()}}</td>
+                            <td class="whitespace-nowrap">{{ \Hekmatinasser\Verta\Verta::instance($productPrice->created_at)->formatJalaliDate()}}</td>
                             <td class="flex items-center justify-center  p-3 text-center">
                                 <a href="{{route('admin.edit.product',$product->id)}}" class="m-4" x-tooltip="ویرایش">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -87,7 +88,7 @@
             </div>
         </div>
         <div class="flex flex-col justify-center w-full">
-            {{$this->products->links('admin.layouts.admin_pagination')}}
+            {{$this->productPrices->links('admin.layouts.admin_pagination')}}
         </div>
     </div>
 </div>
