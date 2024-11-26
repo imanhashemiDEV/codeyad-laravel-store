@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('guaranty_product', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('guaranty_id')->constrained('guaranties');
+            $table->foreignId('product_id')->constrained('products');
             $table->timestamps();
         });
     }
