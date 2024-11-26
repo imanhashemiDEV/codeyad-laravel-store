@@ -7,9 +7,11 @@
     "require": {
         "php": "^8.2",
         "hekmatinasser/verta": "^8.4",
+        "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "realrashid/sweet-alert": "^7.2",
         "spatie/laravel-permission": "^6.9",
         "wireui/wireui": "^2.2"
     },

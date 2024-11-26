@@ -57,7 +57,6 @@ class CreateProduct extends Component
         session()->flash('success', 'محصول ایجاد شد');
         $this->reset();
         $this->redirectRoute('admin.products.list');
-
     }
 
 

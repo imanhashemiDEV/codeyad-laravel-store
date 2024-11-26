@@ -14,10 +14,11 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class CreateProductPrice extends Component
 {
-
+    use LivewireAlert;
     use WithFileUploads;
     #[Validate('required')]
     public $main_price;
@@ -29,6 +30,7 @@ class CreateProductPrice extends Component
     public $colors;
     public $guaranties;
     public $product;
+
     public function mount(Product $product): void
     {
         $this->product = $product;
@@ -39,25 +41,34 @@ class CreateProductPrice extends Component
     {
         $this->validate();
 
-        ProductPrice::query()->create([
-            'main_price' => $this->main_price,
-            'price'=> ($this->main_price)-(($this->main_price * $this->discount)/100),
-            'discount'=>$this->discount,
-            'count'=>$this->count,
-            'max_sell'=>$this->max_sell,
-            'status'=>ProductStatus::Active->value,
-            'product_id'=>$this->product->id,
-            'color_id'=>$this->color_id,
-            'guaranty_id'=>$this->guaranty_id,
-        ]);
+        $exist = ProductPrice::query()
+            ->where('color_id',$this->color_id)
+            ->where('guaranty_id',$this->guaranty_id)
+            ->where('product_id',$this->product->id)
+            ->exists();
+        if ($exist) {
+           // session()->flash('error', 'برای این محصول با این رنگ و گارانتی یک رکورد ثبت شده است');
+           // $this->dispatch('error');
+            $this->alert('error', 'برای این محصول با این رنگ و گارانتی یک رکورد ثبت شده است');
+        }else{
+            ProductPrice::query()->create([
+                'main_price' => $this->main_price,
+                'price'=> ($this->main_price)-(($this->main_price * $this->discount)/100),
+                'discount'=>$this->discount,
+                'count'=>$this->count,
+                'max_sell'=>$this->max_sell,
+                'status'=>ProductStatus::Active->value,
+                'product_id'=>$this->product->id,
+                'color_id'=>$this->color_id,
+                'guaranty_id'=>$this->guaranty_id,
+            ]);
 
-        $this->product->colors()->attach($this->color_id);
-        $this->product->guaranties()->attach($this->guaranty_id);
+            $this->product->colors()->attach($this->color_id);
+            $this->product->guaranties()->attach($this->guaranty_id);
 
-        session()->flash('success', 'تنوع محصول ایجاد شد');
-        $this->reset();
-        $this->redirectRoute('admin.product.prices',$this->product->id);
-
+            session()->flash('success', 'تنوع محصول ایجاد شد');
+            $this->redirectRoute('admin.product.prices',$this->product->id);
+        }
     }
 
 

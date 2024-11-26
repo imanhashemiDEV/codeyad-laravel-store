@@ -1,9 +1,7 @@
 <div class="grid grid-cols-1 gap-6 p-4">
     <div class="panel p-5">
-
         @include('admin.layouts.alert')
         @include('admin.layouts.waiting')
-
         <div class="mb-5">
             <h1 class="my-4 text-xl font-semibold">ایجاد  تنوع قیمت</h1>
             <form  class="space-y-5">
@@ -86,6 +84,11 @@
     };
     NiceSelect.bind(document.getElementById('color-select'), options);
     NiceSelect.bind(document.getElementById('guaranty-select'), options);
+
+    Livewire.on('error', (event) => {
+        Swal.fire("برای این محصول با این رنگ و گارانتی یک رکورد ثبت شده است");
+    });
+
 </script>
 @endscript
 

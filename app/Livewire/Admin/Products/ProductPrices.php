@@ -28,6 +28,7 @@ class ProductPrices extends Component
     public function productPrices():Paginator
     {
         return ProductPrice::query()
+            ->with('color','guaranty')
             ->where('product_id',$this->product->id)
             ->paginate(10);
     }
