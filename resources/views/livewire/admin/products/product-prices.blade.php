@@ -52,7 +52,7 @@
                             </td>
                             <td class="whitespace-nowrap">{{ \Hekmatinasser\Verta\Verta::instance($productPrice->created_at)->formatJalaliDate()}}</td>
                             <td class="flex items-center justify-center  p-3 text-center">
-                                <a href="{{route('admin.edit.product',$product->id)}}" class="m-4" x-tooltip="ویرایش">
+                                <a href="{{route('admin.edit.product.prices',$productPrice->id)}}" class="m-4" x-tooltip="ویرایش">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 ltr:mr-2 rtl:ml-2 text-blue-500">
                                         <path
@@ -63,7 +63,7 @@
                                               stroke="currentColor" stroke-width="1.5"></path>
                                     </svg>
                                 </a>
-                                <button wire:click="$dispatch('delete-product', { product_id : {{$product->id}} })" type="button" x-tooltip="حذف">
+                                <button wire:click="$dispatch('delete-product-price', { product_price_id : {{$productPrice->id}} })" type="button" x-tooltip="حذف">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-rose-500">
                                         <path d="M20.5001 6H3.5" stroke="currentColor" stroke-width="1.5"
@@ -94,7 +94,7 @@
 </div>
 @script
 <script>
-    Livewire.on('delete-product',(event)=>{
+    Livewire.on('delete-product-price',(event)=>{
         Swal.fire({
             title: "آیا از حذف مطمئن هستید",
             icon: "warning",
@@ -105,7 +105,7 @@
             cancelButtonText: "خیر",
         }).then((result) => {
             if (result.isConfirmed){
-                Livewire.dispatch('destroy-product',{ product_id : event.product_id})
+                Livewire.dispatch('destroy-product-price',{ product_price_id : event.product_price_id})
                 Swal.fire({
                     title: "حذف انجام شد",
                     icon: "success"

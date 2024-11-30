@@ -51,7 +51,7 @@ class CreateProductPrice extends Component
            // $this->dispatch('error');
             $this->alert('error', 'برای این محصول با این رنگ و گارانتی یک رکورد ثبت شده است');
         }else{
-            ProductPrice::query()->create([
+           $newPrice = ProductPrice::query()->create([
                 'main_price' => $this->main_price,
                 'price'=> ($this->main_price)-(($this->main_price * $this->discount)/100),
                 'discount'=>$this->discount,
@@ -63,8 +63,25 @@ class CreateProductPrice extends Component
                 'guaranty_id'=>$this->guaranty_id,
             ]);
 
-            $this->product->colors()->attach($this->color_id);
-            $this->product->guaranties()->attach($this->guaranty_id);
+            $checkColor = $this->product->colors()->where('color_id',$this->color_id)->exists();
+            if(!$checkColor){
+                $this->product->colors()->attach($this->color_id);
+            }
+
+            $checkGuaranty = $this->product->guaranties()->where('guaranty_id',$this->guaranty_id)->exists();
+            if(!$checkGuaranty){
+                $this->product->guaranties()->attach($this->guaranty_id);
+            }
+
+            $checkPrice = ($this->main_price)-(($this->main_price * $this->discount)/100) < ($this->product->price)-(($this->product->price * $this->product->discount)/100);
+            if($checkPrice){
+                Product::query()->find($this->product->id)->update([
+                    'price'=>$this->main_price,
+                    'discount'=>$this->discount,
+                    'count'=>$this->count,
+                    'max_sell'=>$this->max_sell,
+                ]);
+            }
 
             session()->flash('success', 'تنوع محصول ایجاد شد');
             $this->redirectRoute('admin.product.prices',$this->product->id);
