@@ -3,7 +3,9 @@
 namespace App\Livewire\Admin\Categories;
 
 use App\Models\Category;
+use App\Models\CategoryAttribute;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -17,32 +19,22 @@ class CategoryAttributes extends Component
 {
 
     use WithPagination , WithFileUploads;
-    #[Validate('required|unique:categories,name')]
+    #[Validate('required')]
     public $name;
-    #[Validate('nullable|mimes:jpeg,jpg,png')]
-    public $image;
-    public $parent_id;
-    public $search;
     public $editIndex;
+    public Category $category;
+
 
     public function createRow(): void
     {
         $this->validate();
 
-        if($this->image){
-            $image = $this->image->hashName();
-            $this->image->storeAs('images/categories/', $image,'public');
-        }
-
-
-        Category::query()->create([
+        CategoryAttribute::query()->create([
             'name' => $this->name,
-            'slug' => make_slug($this->name),
-            'image' => $this->image ? $image : null,
-            'parent_id' => $this->parent_id,
+            'category_id' => $this->category->id,
         ]);
 
-        session()->flash('success', 'دسته بندی ایجاد شد');
+        session()->flash('success', 'ویژگی دسته بندی ایجاد شد');
         $this->reset();
 
     }
@@ -50,54 +42,39 @@ class CategoryAttributes extends Component
     public function editRow($id): void
     {
         $this->editIndex = $id;
-        $category = Category::query()->findOrFail($id);
-        $this->name = $category->name;
-        $this->parent_id = $category->parent_id;
+        $category_attribute = CategoryAttribute::query()->findOrFail($id);
+        $this->name = $category_attribute->name;
     }
 
     public function updateRow(): void
     {
-        if($this->image){
-            $image = $this->image->hashName();
-            $this->image->storeAs('images/categories/', $image,'public');
-        }
 
         $this->validate();
-        $category = Category::query()->findOrFail($this->editIndex);
-        $category->update([
+        $category_attribute = CategoryAttribute::query()->findOrFail($this->editIndex);
+        $category_attribute->update([
             'name' => $this->name,
-            'slug' => make_slug($this->name),
-            'image' => $this->image ? $image : $category->image,
-            'parent_id' =>  $this->parent_id,
         ]);
 
-        session()->flash('success', 'دسته بندی ویرایش شد');
+        session()->flash('success', 'ویژگی دسته بندی ویرایش شد');
         $this->reset();
     }
 
     #[Computed()]
-    public function categories():Paginator
+    public function categoryAttributes():Paginator
     {
-        return Category::query()->with('parentCategory')->paginate(10);
+        return CategoryAttribute::query()->paginate(10);
     }
 
-    #[On('destroy-category')]
-    public function destroyRow($category_id): void
+    #[On('destroy-category-attribute')]
+    public function destroyRow($category_attribute_id): void
     {
-        Category::destroy($category_id);
+        CategoryAttribute::destroy($category_attribute_id);
     }
 
-    public function searchData(): void
-    {
-        $this->categories = Category::query()
-            ->where('name', 'like', '%'.$this->search.'%')
-            ->with('parentCategory')->paginate(10);
-    }
 
     #[Layout('admin.master'),Title('لیست دسته بندی ها')]
-    public function render()
+    public function render():View
     {
-        $categories = Category::getCategories();
-        return view('livewire.admin.categories.category-attributes', compact('categories'));
+        return view('livewire.admin.categories.category-attributes');
     }
 }
