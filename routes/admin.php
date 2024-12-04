@@ -14,6 +14,7 @@ use App\Livewire\Admin\Products\EditProduct;
 use App\Livewire\Admin\Products\EditProductPrice;
 use App\Livewire\Admin\Products\ProductList;
 use App\Livewire\Admin\Products\ProductPrices;
+use App\Livewire\Admin\Products\ProductProperties;
 use App\Livewire\Admin\Users\UserList;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +45,4 @@ Route::get('/edit_product/{product}', EditProduct::class)->name('admin.edit.prod
 Route::get('/product_prices/{product}', ProductPrices::class)->name('admin.product.prices');
 Route::get('/create_product_prices/{product}', CreateProductPrice::class)->name('admin.create.product.prices');
 Route::get('/edit_product_prices/{product_price}', EditProductPrice::class)->name('admin.edit.product.prices');
+Route::get('/product_properties/{product}', ProductProperties::class)->name('admin.product.properties');

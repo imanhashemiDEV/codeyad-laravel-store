@@ -53,6 +53,9 @@
                             <td class="whitespace-nowrap flex justify-center">
                                 <a href="{{route('admin.product.prices',$product->id)}}" class="btn btn-outline-info">تنوع قیمت</a>
                             </td>
+                            <td class="whitespace-nowrap flex justify-center">
+                                <a href="{{route('admin.product.properties',$product->id)}}" class="btn btn-outline-warning">ویژگی های محصول</a>
+                            </td>
                             <td class="whitespace-nowrap">{{ \Hekmatinasser\Verta\Verta::instance($product->created_at)->formatJalaliDate()}}</td>
                             <td class="flex items-center justify-center  p-3 text-center">
                                 <a href="{{route('admin.edit.product',$product->id)}}" class="m-4" x-tooltip="ویرایش">
