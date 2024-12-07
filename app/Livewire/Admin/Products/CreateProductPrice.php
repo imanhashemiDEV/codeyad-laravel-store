@@ -18,8 +18,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class CreateProductPrice extends Component
 {
-    use LivewireAlert;
-    use WithFileUploads;
+    use WithFileUploads , LivewireAlert;
     #[Validate('required')]
     public $main_price;
     #[Validate('required')]

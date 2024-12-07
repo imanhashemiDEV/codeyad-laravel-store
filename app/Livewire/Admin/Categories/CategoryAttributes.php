@@ -35,7 +35,7 @@ class CategoryAttributes extends Component
         ]);
 
         session()->flash('success', 'ویژگی دسته بندی ایجاد شد');
-        $this->reset();
+        $this->reset('name');
 
     }
 
@@ -62,7 +62,9 @@ class CategoryAttributes extends Component
     #[Computed()]
     public function categoryAttributes():Paginator
     {
-        return CategoryAttribute::query()->paginate(10);
+        return CategoryAttribute::query()
+            ->where('category_id',$this->category->id)
+            ->paginate(10);
     }
 
     #[On('destroy-category-attribute')]
