@@ -36,6 +36,7 @@
                         <th class="text-center">برند</th>
                         <th class="text-center">تنوع قیمت</th>
                         <th class="text-center">ویژگی محصول</th>
+                        <th class="text-center">گالری محصول</th>
                         <th class="text-center">تاریخ ایجاد</th>
                         <th class="text-center">عملیات</th>
                     </tr>
@@ -56,6 +57,9 @@
                             </td>
                             <td class="whitespace-nowrap">
                                 <a href="{{route('admin.product.properties',$product->id)}}" class="btn btn-outline-warning">ویژگی های محصول</a>
+                            </td>
+                            <td class="whitespace-nowrap">
+                                <a href="{{route('admin.product.gallery',$product->id)}}" class="btn btn-outline-success">گالری محصول</a>
                             </td>
                             <td class="whitespace-nowrap">{{ \Hekmatinasser\Verta\Verta::instance($product->created_at)->formatJalaliDate()}}</td>
                             <td class="flex items-center justify-center  p-3 text-center">

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use SoftDeletes;
+
     protected $fillable = [
         'name',
         'e_name',
@@ -39,16 +40,22 @@ class Product extends Model
 
     public function colors(): BelongsToMany
     {
-        return $this->belongsToMany(Color::class,'color_product');
+        return $this->belongsToMany(Color::class, 'color_product');
     }
 
     public function guaranties(): BelongsToMany
     {
-        return $this->belongsToMany(Guaranty::class,'guaranty_product');
+        return $this->belongsToMany(Guaranty::class, 'guaranty_product');
     }
 
     public function productProperties(): HasMany
     {
         return $this->hasMany(ProductProperty::class);
-     }
+    }
+
+    public function galleries(): HasMany
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
 }
