@@ -12,7 +12,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "realrashid/sweet-alert": "^7.2",
-        "spatie/laravel-permission": "^6.9",
+        "spatie/laravel-permission": "^6.10",
         "wireui/wireui": "^2.2"
     },
     "require-dev": {

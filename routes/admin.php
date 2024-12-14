@@ -16,6 +16,7 @@ use App\Livewire\Admin\Products\ProductGallery;
 use App\Livewire\Admin\Products\ProductList;
 use App\Livewire\Admin\Products\ProductPrices;
 use App\Livewire\Admin\Products\ProductProperties;
+use App\Livewire\Admin\Roles\RoleList;
 use App\Livewire\Admin\Users\UserList;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,9 @@ Route::get('/', Panel::class)->name('panel');
 
 //--- users ---//
 Route::get('/users', UserList::class)->name('admin.users.list');
+
+//--- roles ---//
+Route::get('/roles', RoleList::class)->name('admin.roles.list');
 
 //--- categories ---//
 Route::get('/categories', CategoryList::class)->name('admin.categories.list');

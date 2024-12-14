@@ -74,6 +74,9 @@
                             <a href="{{route('admin.users.list')}}">کاربران</a>
                         </li>
                         <li>
+                            <a href="{{route('admin.roles.list')}}">نقش ها</a>
+                        </li>
+                        <li>
                             <a href="{{route('admin.categories.list')}}">دسته بندی ها</a>
                         </li>
                         <li>
