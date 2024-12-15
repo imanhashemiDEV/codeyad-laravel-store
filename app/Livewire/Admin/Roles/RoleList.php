@@ -12,6 +12,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleList extends Component
@@ -22,6 +23,15 @@ class RoleList extends Component
     public $name;
     public $search;
     public $editIndex;
+    public $permissions;
+    public $selected_role;
+    public $selected_permissions=[];
+
+    public function mount()
+    {
+        $this->permissions = Permission::query()
+            ->pluck('name', 'id');
+    }
 
     public function createRow(): void
     {
@@ -56,10 +66,24 @@ class RoleList extends Component
         $this->reset();
     }
 
+    public function setSelectedRole($role_id): void
+    {
+        $this->selected_role = Role::query()->findOrFail($role_id);
+        $this->selected_permissions =  $this->selected_role->permissions()->pluck('name');
+    }
+
+    public function saveRolePermissions(): void
+    {
+        $this->selected_role->syncPermissions($this->selected_permissions);
+        session()->flash('success', 'مجوزها به نقش متصل شدند');
+    }
+
     #[Computed()]
     public function roles():Paginator
     {
-        return Role::query()->paginate(10);
+        return Role::query()
+            ->with('permissions')
+            ->paginate(10);
     }
 
     #[On('destroy-role')]

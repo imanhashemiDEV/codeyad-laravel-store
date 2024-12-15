@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 gap-6 p-4">
+<div class="grid grid-cols-1 gap-6 p-4" x-data="modal">
     <div class="panel p-5">
 
         @include('admin.layouts.alert')
@@ -63,6 +63,8 @@
                         <th class="text-center">نام و نام خانوادگی</th>
                         <th class="text-center">ایمیل</th>
                         <th class="text-center">موبایل</th>
+                        <th class="text-center">نقش ها</th>
+                        <th class="text-center">انتصاب نقش ها</th>
                         <th class="text-center">عملیات</th>
                     </tr>
                     </thead>
@@ -73,6 +75,18 @@
                             <td class="whitespace-nowrap">{{$user->name}}</td>
                             <td class="whitespace-nowrap">{{$user->email}}</td>
                             <td class="whitespace-nowrap">{{$user->mobile}}</td>
+                            <td class="whitespace-nowrap">
+                                <ul>
+                                    @foreach($user->roles as $role)
+                                        <li class="badge badge-outline-secondary">{{$role->name}}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
+                            <td class="whitespace-nowrap">
+                                <div class="flex items-center justify-center"  wire:click="setSelectedUser({{$user->id}})">
+                                    <button type="button" class="btn btn-info" @click="toggle">انتصاب نقش ها</button>
+                                </div>
+                            </td>
                             <td class="border-b border-[#ebedf2] p-3 text-center dark:border-[#191e3a]">
                                 <button wire:click="editRow({{$user->id}})" type="button" x-tooltip="Edit">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -96,9 +110,64 @@
             {{$this->users->links('admin.layouts.admin_pagination')}}
         </div>
     </div>
+    <!-- modal -->
+    <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
+        <div class="flex items-center justify-center min-h-screen px-4" @click.self="open = false">
+            <div x-show="open" x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
+                <div class="flex bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-between px-5 py-3">
+                    <h5 class="font-bold text-lg">لیست نقش ها</h5>
+                </div>
+                <div class="p-5">
+                    {{--     Loading       --}}
+                    <div wire:loading class="flex flex-wrap items-center justify-center w-full text-center">
+                        <button type="button" class="btn btn-outline-primary btn-lg w-full">
+                            در حال دریافت اطلاعات
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="inline-block h-5 w-5 animate-[spin_2s_linear_infinite] align-middle ltr:ml-2 rtl:mr-2">
+                                <line x1="12" y1="2" x2="12" y2="6"></line>
+                                <line x1="12" y1="18" x2="12" y2="22"></line>
+                                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                                <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                                <line x1="2" y1="12" x2="6" y2="12"></line>
+                                <line x1="18" y1="12" x2="22" y2="12"></line>
+                                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div wire:loading.remove class="dark:text-white-dark/70 text-base font-medium text-[#1f2937]">
+                        @foreach($roles as $key => $value)
+                            <div>
+                                <label class="inline-flex">
+                                    <input wire:model="selected_roles" value="{{$value}}" type="checkbox" class="form-checkbox outline-primary">
+                                    <span>{{$value}}</span>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="flex justify-end items-center mt-8">
+                        <button type="button" class="btn btn-outline-danger" @click="toggle">انصراف</button>
+                        <button type="button" class="btn btn-primary ltr:ml-4 rtl:mr-4" @click="toggle" wire:click="saveUserRoles">ثبت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+@script
+<script>
+    document.addEventListener("alpine:init", () => {
+        Alpine.data("modal", (initialOpenState = false) => ({
+            open: initialOpenState,
 
+            toggle() {
+                this.open = !this.open;
+            },
+        }));
+    });
 
+</script>
+@endscript
 
 
 

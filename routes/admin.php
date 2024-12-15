@@ -8,6 +8,7 @@ use App\Livewire\Admin\Categories\TrashedCategoryList;
 use App\Livewire\Admin\Colors\ColorList;
 use App\Livewire\Admin\Guaranties\GuarantyList;
 use App\Livewire\Admin\Panel;
+use App\Livewire\Admin\Permissions\PermissionList;
 use App\Livewire\Admin\Products\CreateProduct;
 use App\Livewire\Admin\Products\CreateProductPrice;
 use App\Livewire\Admin\Products\EditProduct;
@@ -25,8 +26,9 @@ Route::get('/', Panel::class)->name('panel');
 //--- users ---//
 Route::get('/users', UserList::class)->name('admin.users.list');
 
-//--- roles ---//
+//--- roles and permissions ---//
 Route::get('/roles', RoleList::class)->name('admin.roles.list');
+Route::get('/permissions', PermissionList::class)->name('admin.permissions.list');
 
 //--- categories ---//
 Route::get('/categories', CategoryList::class)->name('admin.categories.list');
