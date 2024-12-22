@@ -42,7 +42,7 @@ class RoleList extends Component
         ]);
 
         session()->flash('success', 'نقش ایجاد شد');
-        $this->reset();
+        $this->reset('name');
 
     }
 
