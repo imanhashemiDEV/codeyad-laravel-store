@@ -2,7 +2,7 @@
     <div class="shadow-sm">
         <div class="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-[#0e1726]">
             <div class="flex items-center justify-between horizontal-logo ltr:mr-2 rtl:ml-2 lg:hidden">
-                <a href="index.html" class="flex items-center main-logo shrink-0">
+                <a href="{{route('home')}}" class="flex items-center main-logo shrink-0">
                     <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="{{url('panel')}}/images/logo.svg" alt="image" />
                 </a>
 
@@ -266,12 +266,12 @@
                                 </div>
                                 <div class="ltr:pl-4 rtl:pr-4">
                                     <h4 class="text-base">
-                                        جان دو<span class="px-1 text-xs rounded bg-success-light text-success ltr:ml-2 rtl:ml-2">Pro</span>
+                                        {{auth()->user()->name}}<span class="px-1 text-xs rounded bg-success-light text-success ltr:ml-2 rtl:ml-2">Pro</span>
                                     </h4>
                                     <a
                                         class="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white"
                                         href="javascript:;"
-                                    >johndoe@gmail.com</a
+                                    >{{auth()->user()->email}}</a
                                     >
                                 </div>
                             </div>
@@ -364,7 +364,7 @@
                             >
                         </li>
                         <li class="border-t border-white-light dark:border-white-light/10">
-                            <a href="auth-boxed-signin.html" class="!py-3 text-danger" @click="toggle">
+                            <a href="{{route('logout')}}" class="!py-3 text-danger" @click="toggle">
                                 <svg
                                     class="h-4.5 w-4.5 rotate-90 ltr:mr-2 rtl:ml-2"
                                     width="18"

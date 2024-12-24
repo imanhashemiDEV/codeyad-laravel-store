@@ -1,39 +1,38 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
-
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@extends('auth.master')
+@section('content')
+    <div class="min-h-screen text-black main-container dark:text-white-dark">
+        <!-- start main content section -->
+        <div class="flex min-h-screen items-center justify-center bg-[url('../images/map.svg')] bg-cover bg-center dark:bg-[url('../images/map-dark.svg')]">
+            <div class="panel m-6 w-full max-w-lg sm:w-[480px]">
+                <h2 class="mb-3 text-2xl font-bold">تعیین رمز عبور جدید</h2>
+                <form class="space-y-5" method="POST" action="{{ route('password.store') }}">
+                    @csrf
+                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                    <div>
+                        <label for="email">ایمیل</label>
+                        <input value="{{old('email', $request->email)}}" id="email" name="email" type="email" class="form-input" placeholder="ایمیل را وارد کنید" />
+                        @error('email')
+                        <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="password">رمزعبور</label>
+                        <input id="password" name="password" type="password" class="form-input" placeholder="رمزعبور را وارد کنید" />
+                        @error('password')
+                        <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="password">تکرار رمزعبور</label>
+                        <input id="password" name="password_confirmation" type="password" class="form-input" placeholder="رمزعبور را وارد کنید" />
+                        @error('password_confirmation')
+                        <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <button type="submit" class="w-full btn btn-primary">تغییر رمز عبور</button>
+                </form>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        <!-- end main content section -->
+    </div>
+@endsection

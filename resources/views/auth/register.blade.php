@@ -1,52 +1,57 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('auth.master')
+@section('content')
+    <div class="min-h-screen text-black main-container dark:text-white-dark">
+        <!-- start main content section -->
+        <div class="flex min-h-screen items-center justify-center bg-[url('../images/map.svg')] bg-cover bg-center dark:bg-[url('../images/map-dark.svg')]">
+            <div class="panel m-6 w-full max-w-lg sm:w-[480px]">
+                <h2 class="mb-3 text-2xl font-bold">ثبت نام</h2>
+                <p class="mb-7">برای ثبت نام ایمیل و رمز عبور خود را وارد کنید</p>
+                <form class="space-y-5" method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div>
+                        <label for="name">نام</label>
+                        <input id="name" name="name" type="text" class="form-input" placeholder="نام را وارد کنید" />
+                        @error('name')
+                          <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="email">ایمیل</label>
+                        <input id="email" name="email" type="email" class="form-input" placeholder="ایمیل را وارد کنید" />
+                        @error('email')
+                            <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="password">رمزعبور</label>
+                        <input id="password" name="password" type="password" class="form-input" placeholder="رمزعبور را وارد کنید" />
+                        @error('password')
+                           <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="password">تکرار رمزعبور</label>
+                        <input id="password" name="password_confirmation" type="password" class="form-input" placeholder="رمزعبور را وارد کنید" />
+                        @error('password_confirmation')
+                           <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label class="cursor-pointer">
+                            <input type="checkbox" class="form-checkbox" />
+                            <span for="custom_checkbox" class="text-white-dark"
+                            >موافقم با <a href="javascript:;" class="text-primary hover:underline">شرایط و ضوابط</a></span
+                            >
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full btn btn-primary">ثبت نام</button>
+                </form>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                <p class="text-center mt-4">
+                    از قبل حساب کاربری دارید؟ <a href="{{route('login')}}" class="font-bold text-primary hover:underline">ورود</a>
+                </p>
+            </div>
         </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        <!-- end main content section -->
+    </div>
+@endsection

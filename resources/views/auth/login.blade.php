@@ -1,47 +1,45 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('auth.master')
+@section('content')
+    <div class="min-h-screen text-black main-container dark:text-white-dark">
+        <!-- start main content section -->
+        <div class="flex min-h-screen items-center justify-center bg-[url('{{url('panel/images/map.svg')}}')] bg-cover bg-center dark:bg-[url('{{url('panel/images/map-dark.svg')}}')]">
+            <div class="panel m-6 w-full max-w-lg sm:w-[480px]">
+                <h2 class="mb-3 text-2xl font-bold">ورود</h2>
+                <p class="mb-7">برای ورود ایمیل و رمز عبور خود را وارد کنید</p>
+                <form class="space-y-5" method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div>
+                        <label for="email">ایمیل</label>
+                        <input id="email" type="email" name="email" class="form-input" placeholder="ایمیل وارد کنید" />
+                        @error('email')
+                           <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+                    </div>
+                    <div>
+                        <label for="password">رمزعبور</label>
+                        <input id="password" type="password" name="password" class="form-input" placeholder="رمزعبور  وارد کنید" />
+                        @error('password')
+                            <p class="mt-2 text-rose-500">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label class="cursor-pointer">
+                            <input type="checkbox" class="form-checkbox" name="remember" />
+                            <span class="text-white-dark">من را به خاطر بسپار</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full btn btn-primary">ورود</button>
+                </form>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <p class="text-center mt-4">
+                    حساب کاربری ندارید؟ <a href="{{ route('password.request') }}" class="font-bold text-primary hover:underline">ثبت نام</a>
+                </p>
+                <p class="text-center mt-4">
+                     <a href="{{ route('password.request') }}" class="font-bold text-primary hover:underline">فراموشی رمز عبور</a>
+                </p>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        <!-- end main content section -->
+    </div>
+@endsection
