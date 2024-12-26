@@ -12,13 +12,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function (){
             Route::prefix('admin')
-                ->middleware(['web', 'auth','verified','admin'])
+                ->middleware(['web', 'auth','verified_mobile','admin'])
                 ->group(base_path('routes/admin.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'admin'=>\App\Http\Middleware\AdminMiddleware::class
+            'admin'=>\App\Http\Middleware\AdminMiddleware::class,
+            'verified_mobile'=>\App\Http\Middleware\MobileVerificatedMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

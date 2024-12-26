@@ -5,13 +5,13 @@
         <div class="flex min-h-screen items-center justify-center bg-[url('{{url('panel/images/map.svg')}}')] bg-cover bg-center dark:bg-[url('{{url('panel/images/map-dark.svg')}}')]">
             <div class="panel m-6 w-full max-w-lg sm:w-[480px]">
                 <h2 class="mb-3 text-2xl font-bold">ورود</h2>
-                <p class="mb-7">برای ورود ایمیل و رمز عبور خود را وارد کنید</p>
-                <form class="space-y-5" method="POST" action="{{ route('login') }}">
+                <p class="mb-7">برای ورود موبایل و رمز عبور خود را وارد کنید</p>
+                <form class="space-y-5" method="POST" action="{{ route('login.by.mobile') }}">
                     @csrf
                     <div>
-                        <label for="email">ایمیل</label>
-                        <input id="email" type="email" name="email" class="form-input" placeholder="ایمیل وارد کنید" />
-                        @error('email')
+                        <label for="mobile">موبایل</label>
+                        <input id="mobile" type="text" name="mobile" class="form-input" placeholder="موبایل وارد کنید" />
+                        @error('mobile')
                            <p class="mt-2 text-rose-500">{{$message}}</p>
                         @enderror
 
@@ -39,7 +39,7 @@
                     حساب کاربری ندارید؟ <a href="{{ route('register.mobile') }}" class="font-bold text-primary hover:underline">ثبت نام با موبایل</a>
                 </p>
                 <p class="text-center mt-4">
-                     <a href="{{ route('password.request') }}" class="font-bold text-primary hover:underline">فراموشی رمز عبور</a>
+                    <a href="{{ route('password.request') }}" class="font-bold text-primary hover:underline">فراموشی رمز عبور</a>
                 </p>
                 <p class="text-center mt-4">
                     <a href="{{ route('login.mobile') }}" class="font-bold text-primary hover:underline">ورود با موبایل</a>

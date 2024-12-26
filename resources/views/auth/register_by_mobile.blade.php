@@ -5,8 +5,8 @@
         <div class="flex min-h-screen items-center justify-center bg-[url('../images/map.svg')] bg-cover bg-center dark:bg-[url('../images/map-dark.svg')]">
             <div class="panel m-6 w-full max-w-lg sm:w-[480px]">
                 <h2 class="mb-3 text-2xl font-bold">ثبت نام</h2>
-                <p class="mb-7">برای ثبت نام ایمیل و رمز عبور خود را وارد کنید</p>
-                <form class="space-y-5" method="POST" action="{{ route('register') }}">
+                <p class="mb-7">برای ثبت نام موبایل و رمز عبور خود را وارد کنید</p>
+                <form class="space-y-5" method="POST" action="{{ route('register.by.mobile') }}">
                     @csrf
                     <div>
                         <label for="name">نام</label>
@@ -16,9 +16,9 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="email">ایمیل</label>
-                        <input id="email" name="email" type="email" class="form-input" placeholder="ایمیل را وارد کنید" />
-                        @error('email')
+                        <label for="mobile">موبایل</label>
+                        <input id="mobile" name="mobile" type="text" class="form-input" placeholder="موبایل را وارد کنید" />
+                        @error('mobile')
                             <p class="mt-2 text-rose-500">{{$message}}</p>
                         @enderror
                     </div>
@@ -48,10 +48,11 @@
                 </form>
 
                 <p class="text-center mt-4">
-                    از قبل حساب کاربری دارید؟ <a href="{{route('login')}}" class="font-bold text-primary hover:underline">ورود</a>
+                    از قبل حساب کاربری دارید؟ <a href="{{route('login')}}" class="font-bold text-primary hover:underline">ورود با ایمیل</a>
                 </p>
+
                 <p class="text-center mt-4">
-                     <a href="{{route('register.by.mobile')}}" class="font-bold text-primary hover:underline">ثبت نام با موبایل</a>
+                    از قبل حساب کاربری دارید؟ <a href="{{route('login.mobile')}}" class="font-bold text-primary hover:underline">ورود با موبایل</a>
                 </p>
             </div>
         </div>
