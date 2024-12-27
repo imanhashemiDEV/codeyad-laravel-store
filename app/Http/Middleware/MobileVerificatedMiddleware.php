@@ -20,7 +20,7 @@ class MobileVerificatedMiddleware
             return $next($request);
         }
 
-        return redirect()->route('show_mobile_verification');
+        return redirect()->route('show.mobile.verification');
 
     }
 }

@@ -23,7 +23,33 @@ class MobileVerificationController extends Controller
         ]);
         // todo send sms code
 
-        // return
+         return redirect()->route('show.check.code');
+    }
+
+
+    public function showCheckCode()
+    {
+        return view('auth.check-mobile-code');
+    }
+
+    public function checkUserMobileCode(Request $request)
+    {
+       $code = $request->input('code');
+       $user = auth()->user();
+
+       $check = VerificationCode::query()
+           ->latest()
+           ->where('code',$code)
+           ->where('mobile', $user->mobile)
+           ->first();
+       if ($check) {
+           $user->update([
+               'mobile_verified_at'=> now()
+           ]);
+           return redirect()->route('panel');
+       }
+
+       return redirect()->back()->with('message','کد تایید معتبر نمی باشد');
 
 
     }

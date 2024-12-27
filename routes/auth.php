@@ -83,6 +83,10 @@ Route::middleware('auth')->group(function () {
         ->name('show.mobile.verification');
     Route::post('send_mobile_verification', [MobileVerificationController::class,'sendVerificationCode'])
         ->name('send.mobile.verification');
+    Route::get('show_check_code', [MobileVerificationController::class,'showCheckCode'])
+        ->name('show.check.code');
+    Route::post('check_mobile_code', [MobileVerificationController::class,'checkUserMobileCode'])
+        ->name('check.mobile.code');
 
     // Logout User
 

@@ -17,13 +17,13 @@
                         <p class="text-blue-600 font-bold text-md">کد تایید خود را وارد کنید</p>
                     </div>
                 </div>
-                <form class="space-y-5" method="POST">
+                <form class="space-y-5" method="POST" action="{{route('check.mobile.code')}}">
                     @csrf
                     <div>
                         <label for="password">کد تایید</label>
                         <input name="code" type="text" class="form-input" placeholder="کد تایید را وارد کنید" />
                     </div>
-                    <button type="submit" class="w-full btn btn-primary">ارسال کد تایید</button>
+                    <button type="submit" class="w-full btn btn-primary">بررسی کد تایید</button>
                 </form>
             </div>
         </div>
