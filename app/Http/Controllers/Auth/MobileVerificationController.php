@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\MelipayamakService;
 use App\Http\Controllers\Controller;
 use App\Models\VerificationCode;
 use Illuminate\Http\Request;
@@ -21,7 +22,8 @@ class MobileVerificationController extends Controller
             'mobile'=>$user->mobile,
             'code'=>$code,
         ]);
-        // todo send sms code
+
+        MelipayamakService::sendSMS($user->mobile,$code);
 
          return redirect()->route('show.check.code');
     }

@@ -11,6 +11,7 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "melipayamak/laravel": "1.0.0",
         "realrashid/sweet-alert": "^7.2",
         "spatie/laravel-permission": "^6.10",
         "wireui/wireui": "^2.2"

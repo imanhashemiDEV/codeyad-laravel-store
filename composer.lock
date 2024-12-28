@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e767d76e5ae5684dd9ef9ed2d9489147",
+    "content-hash": "c19480e3a5fa27d15f85c4f42035e5f5",
     "packages": [
         {
             "name": "brick/math",
@@ -2145,6 +2145,121 @@
                 }
             ],
             "time": "2024-10-15T19:35:06+00:00"
+        },
+        {
+            "name": "melipayamak/laravel",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Melipayamak/melipayamak-laravel.git",
+                "reference": "8666e3afb2248c5de73b35e3c709a235a7a15393"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Melipayamak/melipayamak-laravel/zipball/8666e3afb2248c5de73b35e3c709a235a7a15393",
+                "reference": "8666e3afb2248c5de73b35e3c709a235a7a15393",
+                "shasum": ""
+            },
+            "require": {
+                "melipayamak/php": "1.0.0"
+            },
+            "type": "laravel-package",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Melipayamak": "Melipayamak\\Laravel\\Facade"
+                    },
+                    "providers": [
+                        "Melipayamak\\Laravel\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Melipayamak\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "melipayamak",
+                    "email": "melipayamak.ir@gmail.com"
+                },
+                {
+                    "name": "Ara Code It",
+                    "email": "ahnara92@gmail.com"
+                }
+            ],
+            "description": "Laravel Melipayamak Integration",
+            "homepage": "http://github.com/Melipayamak/melipayamak-laravel",
+            "keywords": [
+                "api",
+                "laravel",
+                "melipayamak",
+                "sms"
+            ],
+            "support": {
+                "issues": "https://github.com/Melipayamak/melipayamak-laravel/issues",
+                "source": "https://github.com/Melipayamak/melipayamak-laravel/tree/1.0.0"
+            },
+            "time": "2019-12-23T13:20:17+00:00"
+        },
+        {
+            "name": "melipayamak/php",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Melipayamak/melipayamak-php.git",
+                "reference": "b8f7db07eef1fa57f8a23d379949e3f04cb923b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Melipayamak/melipayamak-php/zipball/b8f7db07eef1fa57f8a23d379949e3f04cb923b8",
+                "reference": "b8f7db07eef1fa57f8a23d379949e3f04cb923b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Melipayamak\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Melipayamak Team",
+                    "email": "melipayamak.ir@gmail.com"
+                },
+                {
+                    "name": "Ara Code It",
+                    "email": "ahnara92@gmail.com"
+                },
+                {
+                    "name": "Amirhossein Mehrvarzi",
+                    "email": "info@trigger.ir"
+                }
+            ],
+            "description": "A PHP wrapper for melipayamak's web services",
+            "homepage": "http://github.com/Melipayamak/melipayamak-php",
+            "keywords": [
+                "api",
+                "melipayamak",
+                "sms"
+            ],
+            "support": {
+                "issues": "https://github.com/Melipayamak/melipayamak-php/issues",
+                "source": "https://github.com/Melipayamak/melipayamak-php/tree/1.0.0"
+            },
+            "time": "2019-12-23T13:19:36+00:00"
         },
         {
             "name": "monolog/monolog",
