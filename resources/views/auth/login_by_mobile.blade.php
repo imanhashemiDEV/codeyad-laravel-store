@@ -39,7 +39,7 @@
                     حساب کاربری ندارید؟ <a href="{{ route('register.mobile') }}" class="font-bold text-primary hover:underline">ثبت نام با موبایل</a>
                 </p>
                 <p class="text-center mt-4">
-                    <a href="{{ route('password.request') }}" class="font-bold text-primary hover:underline">فراموشی رمز عبور</a>
+                    <a href="{{ route('show.forget.password.mobile') }}" class="font-bold text-primary hover:underline"> فراموشی رمز عبور با موبایل</a>
                 </p>
                 <p class="text-center mt-4">
                     <a href="{{ route('login.mobile') }}" class="font-bold text-primary hover:underline">ورود با موبایل</a>

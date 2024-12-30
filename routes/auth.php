@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserByMobileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\ResetPasswordByMobileController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,20 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+
+    // forget password by mobile
+
+    Route::get('show-forgot-password-by-mobile', [ResetPasswordByMobileController::class, 'showForgetPasswordByMobile'])
+        ->name('show.forget.password.mobile');
+
+    Route::post('send-forgot-password-by-mobile', [ResetPasswordByMobileController::class, 'sendForgetPasswordCode'])
+        ->name('send.forget.password.mobile');
+
+    Route::get('show-reset-password-by-mobile', [ResetPasswordByMobileController::class, 'showResetPasswordByMobile'])
+        ->name('show.rest.password.mobile');
+    Route::post('check-reset-password-by-mobile', [ResetPasswordByMobileController::class, 'checkResetPasswordByMobile'])
+        ->name('check.forget.password.mobile');
+
 });
 
 Route::middleware('auth')->group(function () {

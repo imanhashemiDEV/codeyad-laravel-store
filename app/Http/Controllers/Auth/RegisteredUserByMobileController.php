@@ -32,7 +32,7 @@ class RegisteredUserByMobileController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'mobile' => ['required', 'string', 'lowercase',new PersianPhoneRule(),  'max:11', 'unique:'.User::class],
+            'mobile' => ['required', 'string',new PersianPhoneRule(),  'max:11', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
