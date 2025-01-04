@@ -1,0 +1,44 @@
+/*------------------------------------
+    Rating
+------------------------------------*/
+.ratings-container {
+    direction: ltr;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1;
+    white-space: nowrap;
+
+    .ratings,
+    .ratings-val {
+        display: inline-block;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        font-family: "Ionicons";
+    }
+
+    .ratings {
+        position: relative;
+        color: #ccc;
+
+        &:before {
+            content: "☆""☆""☆""☆""☆";
+        }
+    }
+
+    .ratings-val {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #fcb941;
+
+        &:before {
+            content: "★""★""★""★""★";
+        }
+    }
+}

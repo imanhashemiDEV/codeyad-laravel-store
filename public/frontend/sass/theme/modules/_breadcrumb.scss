@@ -1,0 +1,37 @@
+/*------------------------------------
+    Breadcrumb
+------------------------------------*/
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+
+    nav {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position: relative;
+        padding: 10px 0;
+
+        a {
+            color: #6a6a6a;
+            font-size: 12px;
+            margin-left: 10px;
+            position: relative;
+            font-family: Verdana, Shabnam;
+
+            &::after {
+                content: '/';
+                font-size: 13px;
+                font-weight: 300;
+                position: absolute;
+                top: 0px;
+                left: -10px;
+            }
+
+            &:last-child::after {
+                display: none;
+            }
+        }
+    }
+}

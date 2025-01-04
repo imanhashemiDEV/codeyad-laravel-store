@@ -1,0 +1,251 @@
+@font-face {
+    font-family: Shabnam;
+    src: url("../fonts/shabnam/Shabnam.eot");
+    src: url("../fonts/shabnam/Shabnam.eot?#iefix") format("embedded-opentype"), url("../fonts/shabnam/Shabnam.woff2") format("woff2"), url("../fonts/shabnam/Shabnam.woff") format("woff"), url("../fonts/shabnam/Shabnam.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url("../fonts/shabnam/Shabnam-Bold.eot");
+    src: url("../fonts/shabnam/Shabnam-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/shabnam/Shabnam-Bold.woff2") format("woff2"), url("../fonts/shabnam/Shabnam-Bold.woff") format("woff"), url("../fonts/shabnam/Shabnam-Bold.ttf") format("truetype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url("../fonts/shabnam/Shabnam-Thin.eot");
+    src: url("../fonts/shabnam/Shabnam-Thin.eot?#iefix") format("embedded-opentype"), url("../fonts/shabnam/Shabnam-Thin.woff2") format("woff2"), url("../fonts/shabnam/Shabnam-Thin.woff") format("woff"), url("../fonts/shabnam/Shabnam-Thin.ttf") format("truetype");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url("../fonts/shabnam/Shabnam-Light.eot");
+    src: url("../fonts/shabnam/Shabnam-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/shabnam/Shabnam-Light.woff2") format("woff2"), url("../fonts/shabnam/Shabnam-Light.woff") format("woff"), url("../fonts/shabnam/Shabnam-Light.ttf") format("truetype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url("../fonts/shabnam/Shabnam-Medium.eot");
+    src: url("../fonts/shabnam/Shabnam-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/shabnam/Shabnam-Medium.woff2") format("woff2"), url("../fonts/shabnam/Shabnam-Medium.woff") format("woff"), url("../fonts/shabnam/Shabnam-Medium.ttf") format("truetype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: DimaMolsaq;
+    src: url('../fonts/DimaMolsaq/DimaMolsaq.woff') format('woff');
+    font-weight: 500;
+}
+
+body {
+    background-color: #fff;
+    font-family: Shabnam;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: right;
+    overflow-x: hidden !important;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    transition: all .2s ease;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+input,
+input:focus,
+button,
+button:focus {
+    border: 0;
+    outline: none;
+}
+
+ol,
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-style--circle {
+    list-style: circle;
+}
+
+hr {
+    margin: 0 !important;
+}
+
+.container {
+    max-width: 1366px;
+
+    &.container--md {
+        max-width: 1100px;
+    }
+}
+
+.dir-ltr {
+    direction: ltr;
+}
+
+.dir-rtl {
+    direction: rtl;
+}
+
+.nicescroll-cursors {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.link--with-border-bottom {
+    color: #2196F3;
+    background-color: transparent;
+    border-bottom: 1px dashed #2196F3;
+
+    &:hover {
+        color: #1565c0;
+    }
+}
+
+.text-sm {
+    font-size: 13px !important;
+}
+
+.border-bottom-dt {
+    color: #007bff !important;
+    border-bottom: 1px dashed #007bff;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+
+    i {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 30px;
+        background: #eee;
+        border-radius: 50%;
+        box-sizing: border-box;
+        color: #666;
+        padding-top: 12px;
+        margin-left: 20px;
+        font-size: 24px;
+        text-align: center;
+    }
+}
+
+.shadow-around {
+    background-color: #fff;
+    border: 1px solid #ededed;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.rounded-md {
+    border-radius: 10px;
+}
+
+.empty-box {
+    padding: 80px 0;
+    text-align: center;
+
+    .icon {
+        margin-bottom: 25px;
+
+        i {
+            font-size: 40px;
+            color: #dedede;
+        }
+    }
+
+    .message {
+        p {
+            font-size: 22px;
+            color: #dedede;
+        }
+    }
+
+    .pic {
+        img {
+            max-width: 100%;
+        }
+    }
+
+    &.empty-box--404 {
+        .pic {
+            img {
+                max-width: 500px;
+            }
+        }
+    }
+
+}
+
+.page-wrapper {
+    direction: rtl;
+}
+
+.page-content {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    width: 100%;
+}
+
+.w-120 {
+    width: 120px;
+}
+
+.rounded--top-0 {
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+.box {
+    background-color: #fff;
+    border: 0 !important;
+    padding: 15px;
+
+    &.box--rounded {
+        border-radius: 15px;
+    }
+}
+
+.icon--xl {
+    font-size: 45px;
+}
+
+.icon--lg {
+    font-size: 35px;
+}
+
+.apexcharts-canvas {
+    .apexcharts-legend {
+        .apexcharts-legend-series {
+            .apexcharts-legend-text {
+                font-family: Shabnam !important;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .apexcharts-text,
+    .apexcharts-tooltip-title,
+    .apexcharts-xaxistooltip-text,
+    .apexcharts-tooltip-text-label,
+    .apexcharts-tooltip-text-value {
+        font-family: Shabnam !important;
+    }
+
+    .apexcharts-tooltip-marker {
+        margin-right: 0 !important;
+        margin-left: 10px;
+    }
+}

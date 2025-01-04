@@ -1,0 +1,137 @@
+/*------------------------------------
+    color switcher
+------------------------------------*/
+#colorswitch-option {
+    position: fixed;
+    top: 34%;
+    left: 0;
+    z-index: 10;
+}
+
+#colorswitch-option button {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    font-size: 22px;
+    border: 0;
+}
+
+#colorswitch-option ul {
+    position: absolute;
+    left: -150px;
+    width: 150px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 0px 35px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    z-index: 11;
+}
+
+#colorswitch-option ul.show {
+    left: 0;
+}
+
+#colorswitch-option .colorswitch-option-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+#colorswitch-option ul li {
+    width: 33%;
+    float: left;
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+#colorswitch-option ul li span {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+#colorswitch-option ul li.active span::before {
+    content: "\f00c";
+    font-family: "Font Awesome 5 Pro";
+    color: #fff;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+}
+
+/*------------------------------------
+    Footer
+------------------------------------*/
+footer.main-footer {
+    padding: 40px 0 10px;
+    border-top: 1px solid #eee;
+
+    .back-to-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+
+        .back-btn {
+            cursor: pointer;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 5px 15px;
+
+            .icon {
+                margin-left: 7px;
+            }
+
+            span {
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .copy-right p {
+        color: #777;
+        font-size: 13px;
+    }
+}
+
+footer.mini-footer {
+    padding: 15px 0;
+
+    .mini-footer-menu {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+
+        li {
+            margin-left: 15px;
+
+            &:last-child {
+                margin-left: 0;
+            }
+
+            a {
+                color: #979797;
+            }
+        }
+    }
+
+    .footer-light-text {
+        color: #979797;
+        text-align: center;
+    }
+
+    .copy-right-mini-footer {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+}
+
+.rounded-box--footer {
+    border-radius: 15px;
+}

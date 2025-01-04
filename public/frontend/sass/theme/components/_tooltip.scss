@@ -1,0 +1,19 @@
+/*------------------------------------
+    Tooltip
+------------------------------------*/
+.tooltip {
+    .arrow {
+        display: none;
+    }
+
+    .tooltip-inner {
+        background-color: #fff;
+        color: #000;
+        font-family: Shabnam;
+        font-size: 13px;
+    }
+
+    &.show {
+        opacity: 1;
+    }
+}

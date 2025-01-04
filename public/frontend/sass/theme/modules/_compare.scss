@@ -1,0 +1,71 @@
+/*------------------------------------
+    Compare
+------------------------------------*/
+.compare-quick-title {
+    color: #4d4d4d;
+    font-size: 19px;
+    line-height: 1.158;
+    margin-bottom: 25px;
+    letter-spacing: -.3px;
+    position: relative;
+    padding-right: 19px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 3px;
+        width: 0;
+        height: 0;
+        border-color: transparent #00bfd6 transparent transparent;
+        border-style: solid;
+        border-width: 7px 7px 7px 0;
+    }
+}
+
+.compare-quick-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 47px;
+    background-color: #fff;
+
+    &>li {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 10px 0;
+    }
+}
+
+.compare-list-title {
+    flex: 0 0 100%;
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 1.692;
+    padding: 9px 26px;
+    background-color: #eaeaea;
+    font-weight: 700;
+}
+
+.compare-list-value {
+    flex: 0 0 25%;
+    max-width: 25%;
+    border-right: 1px solid #e4e4e4;
+
+    &:first-child {
+        border-right: none;
+    }
+
+    .block {
+        padding: 14px 18px 12px;
+        font-size: 14px;
+        line-height: 1.571;
+        color: #4d4d4d;
+        letter-spacing: -.3px;
+        min-height: 47px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+    }
+}

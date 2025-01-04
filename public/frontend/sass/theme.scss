@@ -1,0 +1,41 @@
+/*
+ * همتا | Ecommerce Bootstrap Theme
+ * Copyright 2021 BahramiiiRad
+ * Theme Styles
+ */
+
+/*------------------------------------
+    components
+        badge
+        buttons
+        card
+        form
+        rating
+        modal
+        navs
+        select2
+        table
+        tooltip
+    modules
+        header
+        responsive-header
+        banner
+        breadcrumb
+        auth
+        checkout
+        slider
+        product
+        pagination
+        services
+        social
+        widget
+        table
+        footer
+
+------------------------------------*/
+
+// Theme Core
+@import 'theme/reboot';
+@import 'theme/components';
+@import 'theme/modules';
+@import 'theme/responsive';

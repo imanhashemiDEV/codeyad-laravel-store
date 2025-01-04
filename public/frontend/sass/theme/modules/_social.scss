@@ -1,0 +1,28 @@
+/*------------------------------------
+    Social
+------------------------------------*/
+.social ul li {
+    display: inline-block;
+    margin-left: 10px;
+
+    a {
+        color: #979797;
+        font-size: 24px;
+
+        &.instagram {
+            color: #e4405f;
+        }
+
+        &.twitter {
+            color: #1da1f2;
+        }
+
+        &.linkedin {
+            color: #0077b5;
+        }
+
+        &.telegram {
+            color: #0088cc;
+        }
+    }
+}

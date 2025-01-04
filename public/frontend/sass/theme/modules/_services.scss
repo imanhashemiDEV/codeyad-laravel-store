@@ -1,0 +1,25 @@
+/*------------------------------------
+    Services
+------------------------------------*/
+.service-item {
+    display: flex;
+    align-items: flex-start;
+
+    img {
+        width: 48px;
+        margin-left: 10px;
+    }
+
+    .service-item-body {
+        flex: 1;
+
+        h6 {
+            font-weight: 600;
+        }
+
+        p {
+            color: #616161;
+            font-size: 11px;
+        }
+    }
+}

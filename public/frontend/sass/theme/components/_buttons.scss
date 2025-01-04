@@ -1,0 +1,60 @@
+/*------------------------------------
+    Buttons
+------------------------------------*/
+.btn {
+    border-radius: 7px;
+    box-shadow: unset !important;
+
+    .btn-with-spinner {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &.btn-dark {
+        box-shadow: 0 2px 6px #728394;
+    }
+
+    &.btn-primary,
+    &.btn-outline-primary {
+        border: 1px solid #007bff;
+    }
+
+    &.btn-secondary,
+    &.btn-outline-secondary {
+        border: 1px solid #6c757d;
+    }
+
+    &.btn-success,
+    &.btn-outline-success {
+        border: 1px solid #28a745;
+    }
+
+    &.btn-danger,
+    &.btn-outline-danger {
+        border: 1px solid #dc3545;
+    }
+
+    &.btn-warning,
+    &.btn-outline-warning {
+        border: 1px solid #ffc107;
+    }
+
+    &.btn-info,
+    &.btn-outline-info {
+        border: 1px solid #17a2b8;
+    }
+
+    &.btn-light,
+    &.btn-outline-light {
+        border: 1px solid #f8f9fa;
+    }
+
+    &.btn-dark,
+    &.btn-outline-dark {
+        border: 1px solid #343a40;
+    }
+
+    &:focus {
+        box-shadow: unset !important;
+    }
+}

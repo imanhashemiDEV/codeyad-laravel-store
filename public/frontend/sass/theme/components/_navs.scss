@@ -1,0 +1,20 @@
+/*------------------------------------
+    Navs
+------------------------------------*/
+.nav-tabs {
+    border-bottom: 0;
+
+    li {
+        a {
+            border: 0 !important;
+            line-height: 40px;
+            font-size: 14px;
+            border-bottom: 3px solid transparent !important;
+            color: #17a2b8;
+
+            &.active {
+                border-color: #000 !important;
+            }
+        }
+    }
+}

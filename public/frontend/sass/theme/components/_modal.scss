@@ -1,0 +1,43 @@
+/*------------------------------------
+    Modal
+------------------------------------*/
+.modal {
+    padding-right: 0 !important;
+
+    .modal-dialog {
+        .modal-content {
+            border: 1px solid #ededed;
+            border-radius: 7px;
+
+            .modal-header,
+            .modal-footer {
+                border: 0;
+            }
+
+            .modal-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .close {
+                    padding: 0;
+                    margin: 0;
+                    position: absolute;
+                    left: 15px;
+                    font-size: 30px !important;
+                }
+            }
+        }
+    }
+}
+
+.modal-backdrop {
+    &.show {
+        opacity: .2;
+    }
+}
+
+.modal-open {
+    padding-right: 0 !important;
+    overflow: auto !important;
+}

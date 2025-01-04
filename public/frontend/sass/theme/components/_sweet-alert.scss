@@ -1,0 +1,17 @@
+/*------------------------------------
+    SweetAlert
+------------------------------------*/
+.swal2-popup {
+    border-radius: 15px !important;
+
+    button.swal2-styled {
+        border-radius: 10px;
+        padding-right: 30px;
+        padding-left: 30px;
+        font-weight: normal;
+
+        &:focus {
+            box-shadow: unset;
+        }
+    }
+}

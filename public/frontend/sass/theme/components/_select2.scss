@@ -1,0 +1,46 @@
+/*------------------------------------
+    Select2
+------------------------------------*/
+.select2-container {
+    width: 100% !important;
+
+    .select2-selection {
+        background-color: #fff;
+        width: 100% !important;
+        height: 50px;
+        border: 1px solid #eee;
+        border-radius: 7px;
+        line-height: 20px;
+
+        .select2-selection__rendered {
+            line-height: 50px;
+        }
+
+        .select2-selection__arrow {
+            height: 50px;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .select2-dropdown {
+        background-color: #fff;
+        border: 0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+
+        .select2-search__field {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 7px;
+        }
+
+        ul {
+            li {
+                font-size: 13px;
+            }
+        }
+    }
+}

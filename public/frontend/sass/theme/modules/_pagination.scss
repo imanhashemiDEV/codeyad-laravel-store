@@ -1,0 +1,27 @@
+/*------------------------------------
+    Pagination
+------------------------------------*/
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        color: #000;
+        border-radius: 10px;
+        font-size: 18px;
+
+        &.current {
+            background-color: #007bff;
+            box-shadow: 0 3px 6px rgba(151, 151, 151, 0.3);
+            color: #fff;
+        }
+    }
+}
