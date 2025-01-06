@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,7 +18,7 @@ class Category extends Model
         'parent_id'
     ];
 
-    public function parentCategory(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function parentCategory(): BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id','id')->withDefault(['name' => 'دسته بندی اصلی']);
     }

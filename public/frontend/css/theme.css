@@ -2268,12 +2268,12 @@ header.page-header .nav-wrapper>ul>li.category-list>ul>li>ul>li>a {
   white-space: nowrap;
 }
 
-header.page-header .nav-wrapper>ul>li.category-list>ul>li>ul>li>a:after {
-  content: "\f104";
-  font-family: "Font Awesome 5 Pro";
-  position: relative;
-  left: -3px;
-}
+/*header.page-header .nav-wrapper>ul>li.category-list>ul>li>ul>li>a:after {*/
+/*  content: "\f104";*/
+/*  font-family: "Font Awesome 5 Pro";*/
+/*  position: relative;*/
+/*  left: -3px;*/
+/*}*/
 
 header.page-header .nav-wrapper>ul>li.category-list>ul>li>ul>li>ul li a {
   color: #a6a6a6;
