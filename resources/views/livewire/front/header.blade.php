@@ -220,10 +220,6 @@
 
 
 
-
-
-
-
                         <li>
                             <a href="#">رزرو</a>
                             <ul class="row">
@@ -312,20 +308,14 @@
                         </li>
                         <li class="col-5">
                             <a href="#">
-                                <img src="{{url('frontend')}}/images/mega-menu/amazing-offer.jpg" class="rounded"
+                                <img src="{{url('frontend/images/mega-menu/amazing-offer.jpg')}}" class="rounded"
                                      alt="amazing-offer">
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fal fa-shield-check text-success"></i>همتای من</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fal fa-plus-square text-primary"></i>همتا پلاس</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fal fa-coin text-secondary"></i>همتا کلاب</a>
+                    <a href="#"><i class="fal fa-shield-check text-success"></i>کدیاد من</a>
                 </li>
                 <li>
                     <a href="#"><i></i>سوال دارید؟</a>

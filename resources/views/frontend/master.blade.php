@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خانه | HAMTA - Ecommerce HTML Template</title>
+    <title>{{$title}}</title>
     <!-- font-awesome -->
     <link rel="stylesheet" href="{{url('frontend/css/font-awesome.min.css')}}">
     <!-- Bootstrap 4.5.3 -->

@@ -309,40 +309,54 @@
         <section class="product-carousel in-box">
             <div class="section-title">
                 <i class="fad fa-percentage"></i>
-                منتخب محصولات تخفیف و حراج
+                جدیدترین محصولات
             </div>
             <div class="swiper-container slider-lg pb-0">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="product-box">
-                            <div class="product-box--thumbnail-container">
-                                <span class="product-box--specialSell"></span>
-                                <img src="{{url('frontend/images/products/01.jpg')}}" class="product-box--thumbnail"
-                                     alt="product title">
-                                <a href="#" class="product-box--link"></a>
-                            </div>
-                            <div class="product-box--detail">
-                                <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova 9 NAM-LX9
-                                        دو سیم کارت ظرفیت 128گیگابایت و 8 گیگابایت رم</a></h3>
-                                <div class="product-box--price-container">
-                                    <div class="product-box--price-discount">6%</div>
-                                    <div class="product-box--price">
+                    @foreach($this->newestProducts as $newProduct)
+                        <div class="swiper-slide">
+                            <div class="product-box">
+                                <div class="product-box--thumbnail-container">
+                                    <span class="product-box--specialSell"></span>
+                                    <img src="{{url('images/products/'.$newProduct->image)}}" class="product-box--thumbnail"
+                                         alt="product title">
+                                    <a href="#" class="product-box--link"></a>
+                                </div>
+                                <div class="product-box--detail">
+                                    <h3 class="product-box--title"><a href="#">{{$newProduct->name}}</a></h3>
+                                    <div class="product-box--price-container">
+                                        @if($newProduct->discount)
+                                            <div class="product-box--price-discount">{{$newProduct->discount}}%</div>
+                                        @endif
+                                        <div class="product-box--price">
+                                            @if($newProduct->discount)
                                                 <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">10,359,000</div>
+                                                    <div class="product-box--price-value">
+                                                        {{ $newProduct->price - ($newProduct->price * $newProduct->discount)/100 }}
+                                                    </div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                        <span class="product-box--price-old">10,990,000</span>
+                                            <span class="product-box--price-old">{{$newProduct->price}}</span>
+                                            @else
+                                                <span class="product-box--price-now pt-4">
+                                                    <div class="product-box--price-value">{{$newProduct->price}}</div>
+                                                    <div class="product-box--price-currency">تومان</div>
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="product-box--action">
-                                    <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                            class="fas fa-heart"></i></a>
-                                    <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                        سبد</a>
+                                    <div class="product-box--action">
+                                        <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
+                                                class="fas fa-heart"></i></a>
+                                        <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                            سبد</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
+
+
                     <div class="swiper-slide">
                         <div class="product-box">
                             <div class="product-box--thumbnail-container">
