@@ -320,10 +320,10 @@
                                     <span class="product-box--specialSell"></span>
                                     <img src="{{url('images/products/'.$newProduct->image)}}" class="product-box--thumbnail"
                                          alt="product title">
-                                    <a href="#" class="product-box--link"></a>
+                                    <a href="{{route('single.product',$newProduct->id)}}" class="product-box--link"></a>
                                 </div>
                                 <div class="product-box--detail">
-                                    <h3 class="product-box--title"><a href="#">{{$newProduct->name}}</a></h3>
+                                    <h3 class="product-box--title"><a href="{{route('single.product',$newProduct->id)}}">{{$newProduct->name}}</a></h3>
                                     <div class="product-box--price-container">
                                         @if($newProduct->discount)
                                             <div class="product-box--price-discount">{{$newProduct->discount}}%</div>
