@@ -6,9 +6,9 @@
                 <div class="breadcrumb mb-1">
                     <nav>
                         <a href="#">فروشگاه اینترنتی</a>
-                        <a href="#">کالای دیجیتال</a>
-                        <a href="#">گوشی موبایل</a>
-                        <a>گوشی موبایل سامسونگ مدل Galaxy A30s SM-A307FN/DS دو سیم کارت ظرفیت 32 گیگابایت</a>
+                        <a href="#">{{$product->category->parentCategory->name}}</a>
+                        <a href="#">{{$product->category->name}}</a>
+                        <a> {{$product->name}} - {{$product->e_name}} </a>
                     </nav>
                 </div>
                 <!-- end breadcrumb -->
@@ -124,19 +124,19 @@
                 <div class="col-xl-5 col-lg-4 col-md-6">
                     <div class="product-title mb-3">
                         <h1>
-                            گوشی موبایل سامسونگ مدل Galaxy A30s SM-A307FN/DS دو سیم کارت ظرفیت 32 گیگابایت
+                            {{$product->name}}
                         </h1>
                         <h1 class="product-title-en">
-                            Samsung Galaxy A30s SM-A307FN/DS Dual SIM 32GB Mobile Phone
+                            {{$product->e_name}}
                         </h1>
                     </div>
                     <div class="d-block mb-2">
                         <span class="font-weight-bold">برند:</span>
-                        <a href="#" class="link--with-border-bottom">سامسونگ</a>
+                        <a href="#" class="link--with-border-bottom">{{$product->brand->name}}</a>
                     </div>
                     <div class="d-block mb-4">
                         <span class="font-weight-bold">گارانتی:</span>
-                        <span>18 ماهه</span>
+                        <span>{{$product->productPrices()->orderBy('main_price','ASC')->first()->guaranty->name}}</span>
                     </div>
                     <div class="product-params-special">
                         <ul data-title="ویژگی‌های محصول">
@@ -177,16 +177,12 @@
                             <span class="d-block mb-3">رنگ:</span>
                             <div class="input-radio-color">
                                 <div class="input-radio-color__list">
-                                    <label class="input-radio-color__item input-radio-color__item--white"
-                                           style="color: #fff;">
-                                        <input type="radio" name="color"> <span></span></label>
-                                    <label class="input-radio-color__item" style="color: #ffd333;">
-                                        <input type="radio" name="color"> <span></span></label>
-                                    <label class="input-radio-color__item" style="color: #ff4040;">
-                                        <input type="radio" name="color"> <span></span></label>
-                                    <label class="input-radio-color__item input-radio-color__item--disabled"
-                                           style="color: #4080ff;">
-                                        <input type="radio" name="color" disabled=""> <span></span></label>
+                                    @foreach($product->colors as $color)
+                                        <label class="input-radio-color__item input-radio-color__item--white"
+                                               style="color: {{$color->code}};">
+                                            <input type="radio" name="color"> <span></span>
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -204,16 +200,19 @@
                         </div>
                         <div class="d-flex align-items-center justify-content-end mt-3">
                             <div class="product-price">
-                                <div class="product-price-info">
-                                    <div class="product-price-off">
-                                        %10 <span>تخفیف</span>
+                                @if($product->discount)
+                                    <div class="product-price-info">
+                                        <div class="product-price-off">
+                                            %{{$product->discount}} <span>تخفیف</span>
+                                        </div>
+                                        <div class="product-price-prev">
+                                            {{$product->price}}
+                                        </div>
                                     </div>
-                                    <div class="product-price-prev">
-                                        3,216,000
-                                    </div>
-                                </div>
+                                @endif
+
                                 <div class="product-price-real">
-                                    <div class="product-price-raw">2,894,400 </div>
+                                    <div class="product-price-raw">{{$product->price - (($product->price * $product->discount )/100)}}</div>
                                     تومان
                                 </div>
                             </div>

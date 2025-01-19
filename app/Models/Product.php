@@ -58,4 +58,9 @@ class Product extends Model
         return $this->hasMany(Gallery::class);
     }
 
+    public function productPrices()
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
+
 }

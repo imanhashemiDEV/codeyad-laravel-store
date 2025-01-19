@@ -19,4 +19,4 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/', HomePage::class)->name('home');
-Route::get('/single_product/{id}', SingleProduct::class)->name('single.product');
+Route::get('/single_product/{product}', SingleProduct::class)->name('single.product');
