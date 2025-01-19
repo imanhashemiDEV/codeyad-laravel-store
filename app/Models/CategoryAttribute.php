@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CategoryAttribute extends Model
 {
@@ -11,8 +13,13 @@ class CategoryAttribute extends Model
         'category_id'
     ];
 
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function productProperties(): HasMany
+    {
+        return $this->hasMany(ProductProperty::class);
     }
 }

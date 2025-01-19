@@ -20,76 +20,25 @@
                     <div class="product-gallery">
                         <div class="swiper-container gallery-slider pb-md-0 pb-3">
                             <div class="swiper-wrapper">
+                                @foreach($product->galleries as $gallery)
                                 <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/01.png')}}"
-                                         data-large="{{asset('frontend/images/gallery/01.png')}}" class="zoom-image"
+                                    <img src="{{asset('images/products/'. $gallery->name)}}"
+                                         data-large="{{asset('images/products/'. $gallery->name)}}" class="zoom-image"
                                          alt="gallery item">
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/02.png')}}"
-                                         data-large="{{asset('frontend')}}/images/gallery/02.png" class="zoom-image"
-                                         alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/03.png')}}"
-                                         data-large="{{asset('frontend/images/gallery/03.png')}}" class="zoom-image"
-                                         alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/04.png')}}"
-                                         data-large="{{asset('frontend/images/gallery/04.png')}}" class="zoom-image"
-                                         alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/05.png')}}"
-                                         data-large="{{asset('frontend/images/gallery/05.png')}}" class="zoom-image"
-                                         alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/06.png')}}"
-                                         data-large="{{asset('frontend/images/gallery/06.png')}}" class="zoom-image"
-                                         alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/07.png')}}"
-                                         data-large="{{asset('frontend/images/gallery/07.png')}}" class="zoom-image"
-                                         alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/08.png')}}"
-                                         data-large="{{asset('frontend/images/gallery/08.png')}}" class="zoom-image"
-                                         alt="gallery item">
-                                </div>
+                                @endforeach
+
                             </div>
                             <!-- Add Pagination -->
                             <div class="swiper-pagination d-md-none"></div>
                         </div>
                         <div class="swiper-container gallery-slider-thumbs d-md-block d-none">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/01.png')}}" alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/02.png')}}" alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/03.png')}}" alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/04.png')}}" alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/05.png')}}" alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/06.png')}}" alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/07.png')}}" alt="gallery item">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{asset('frontend/images/gallery/08.png')}}" alt="gallery item">
-                                </div>
+                                @foreach($product->galleries as $gallery)
+                                    <div class="swiper-slide">
+                                        <img src="{{asset('images/products/'. $gallery->name)}}" alt="gallery item">
+                                    </div>
+                                @endforeach
                             </div>
                             <!-- Add Arrows -->
                             <div class="swiper-button-next"></div>
@@ -140,26 +89,16 @@
                     </div>
                     <div class="product-params-special">
                         <ul data-title="ویژگی‌های محصول">
-                            <li>
-                                <span>حافظه داخلی:</span>
-                                <span>32 گیگابایت</span>
-                            </li>
-                            <li>
-                                <span>مقدار RAM: </span>
-                                <span>3 گیگابایت</span>
-                            </li>
-                            <li>
-                                <span>اندازه:</span>
-                                <span>6.4 اینچ</span>
-                            </li>
-                            <li>
-                                <span>رزولوشن تصویر: </span>
-                                <span>1560 × 720 پیکسل</span>
-                            </li>
-                            <li>
-                                <span>تعداد سيم کارت:</span>
-                                <span>دو سیم کارت</span>
-                            </li>
+                            @foreach($product->category->categoryAttributes()->with('productProperties')->get() as $attribute)
+                                <li>
+                                    <span>{{$attribute->name}}:</span>
+                                    <ul>
+                                        @foreach($attribute->productProperties as $property)
+                                            <li>{{$property->name}}</li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="alert alert-warning">
