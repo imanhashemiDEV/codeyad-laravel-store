@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,15 +26,17 @@ class Product extends Model
         'description',
         'status',
         'category_id',
-        'brand_id'
+        'brand_id',
+        'color_id',
+        'guaranty_id'
     ];
 
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function brand(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
@@ -58,7 +61,7 @@ class Product extends Model
         return $this->hasMany(Gallery::class);
     }
 
-    public function productPrices()
+    public function productPrices(): HasMany
     {
         return $this->hasMany(ProductPrice::class);
     }

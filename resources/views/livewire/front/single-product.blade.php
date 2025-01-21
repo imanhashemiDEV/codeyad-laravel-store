@@ -88,7 +88,7 @@
                         <span>{{$product->productPrices()->orderBy('main_price','ASC')->first()->guaranty->name}}</span>
                     </div>
                     <div class="product-params-special">
-                        <ul data-title="ویژگی‌های محصول">
+                        <ul  data-title="ویژگی‌های محصول">
                             @foreach($product->category->categoryAttributes()->with('productProperties')->get() as $attribute)
                                 <li>
                                     <span>{{$attribute->name}}:</span>

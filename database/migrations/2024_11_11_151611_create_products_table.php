@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('status')->default(ProductStatus::Active->value);
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('brand_id')->constrained('brands');
+            $table->unsignedBigInteger('color_id')->nullable();
+            $table->unsignedBigInteger('guaranty_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

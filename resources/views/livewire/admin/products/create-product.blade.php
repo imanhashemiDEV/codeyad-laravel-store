@@ -74,6 +74,30 @@
                         <p class="text-danger mt-1">{{$message}}</p>
                         @enderror
                     </div>
+                    <div wire:ignore>
+                        <label for="category_id">رنگ</label>
+                        <select  wire:model="color_id" id="color-select">
+                            <option>انتخاب کنید</option>
+                            @foreach($colors as $key=>$value)
+                                <option value="{{$key}}">{{$value}}</option>
+                            @endforeach
+                        </select>
+                        @error('color_id')
+                        <p class="text-danger mt-1">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div wire:ignore>
+                        <label for="guaranty_id">گارانتی</label>
+                        <select  wire:model="guaranty_id" id="guaranty-select">
+                            <option>انتخاب کنید</option>
+                            @foreach($guaranties as $key=>$value)
+                                <option value="{{$key}}">{{$value}}</option>
+                            @endforeach
+                        </select>
+                        @error('guaranty_id')
+                        <p class="text-danger mt-1">{{$message}}</p>
+                        @enderror
+                    </div>
                     <div>
                         <label for="image">عکس محصول</label>
                         <input wire:model="image" id="ctnFile" type="file" class="p-0 rtl:file-ml-5 form-input file:border-0 file:bg-primary/90 file:py-2 file:px-4 file:font-semibold file:text-white file:hover:bg-primary ltr:file:mr-5" required="">
@@ -115,7 +139,8 @@
             };
             NiceSelect.bind(document.getElementById('category-select'), options);
             NiceSelect.bind(document.getElementById('brand-select'), options);
-
+            NiceSelect.bind(document.getElementById('color-select'), options);
+            NiceSelect.bind(document.getElementById('guaranty-select'), options);
 
             //Define an adapter to upload the files
             class MyUploadAdapter {

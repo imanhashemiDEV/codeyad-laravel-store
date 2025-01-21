@@ -79,6 +79,8 @@ class CreateProductPrice extends Component
                     'discount'=>$this->discount,
                     'count'=>$this->count,
                     'max_sell'=>$this->max_sell,
+                    'color_id'=>$this->color_id,
+                    'guaranty_id'=>$this->guaranty_id,
                 ]);
             }
 
@@ -88,7 +90,7 @@ class CreateProductPrice extends Component
     }
 
 
-    #[Layout('admin.master'),Title('ایجاد محصول')]
+    #[Layout('admin.master'),Title('ایجاد تنوع قیمت')]
     public function render():View
     {
         return view('livewire.admin.products.create-product-price');
