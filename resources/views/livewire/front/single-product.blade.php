@@ -117,9 +117,10 @@
                             <div class="input-radio-color">
                                 <div class="input-radio-color__list">
                                     @foreach($product->colors as $color)
-                                        <label class="input-radio-color__item input-radio-color__item--white"
+                                        <label wire:click="getProductByColor({{$color->id}})" class="input-radio-color__item  input-radio-color__item--white"
                                                style="color: {{$color->code}};">
-                                            <input type="radio" name="color"> <span></span>
+                                            <input type="radio" name="color"> <span
+                                               @if($color->id === $selected_color)  class="border border-circle border-danger" @endif></span>
                                         </label>
                                     @endforeach
                                 </div>
@@ -132,26 +133,26 @@
                             <div class="num-block">
                                 <div class="num-in">
                                     <span class="plus"></span>
-                                    <input type="text" class="in-num" value="1" readonly="">
+                                    <input wire:model="count" type="text" class="in-num" value="1" readonly="">
                                     <span class="minus dis"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-end mt-3">
                             <div class="product-price">
-                                @if($product->discount)
+                                @if($discount)
                                     <div class="product-price-info">
                                         <div class="product-price-off">
-                                            %{{$product->discount}} <span>تخفیف</span>
+                                            %{{$discount}} <span>تخفیف</span>
                                         </div>
                                         <div class="product-price-prev">
-                                            {{$product->price}}
+                                            {{$price}}
                                         </div>
                                     </div>
                                 @endif
 
                                 <div class="product-price-real">
-                                    <div class="product-price-raw">{{$product->price - (($product->price * $product->discount )/100)}}</div>
+                                    <div class="product-price-raw">{{$price - (($price * $discount )/100)}}</div>
                                     تومان
                                 </div>
                             </div>
@@ -212,92 +213,51 @@
         </div>
         <!-- sellers -->
         <div class="product-sellers shadow-around mb-5">
-            <div class="product-seller">
-                <div class="product-seller-col">
-                    <div class="product-seller-title">
-                        <div class="icon">
-                            <i class="fas fa-store-alt"></i>
-                        </div>
-                        <div class="detail">
-                            <div class="name">همتا <span class="badge badge-light rounded-pill">برگزیده</span>
+            @foreach($product_prices as $product_price)
+                <div class="product-seller">
+                    <div class="product-seller-col">
+                        <div class="product-seller-title">
+                            <div class="icon">
+                                <i class="fas fa-store-alt"></i>
                             </div>
-                            <div class="rating">
-                                <span class="value">۹۰.۲٪</span>
-                                <span class="label">رضایت خریداران</span>
-                                <span class="divider">|</span>
-                                <span class="label">عملکرد</span>
-                                <span class="value">عالی</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-seller-col">
-                    <div class="product-seller-conditions">
-                        <div class="product-seller-info">
-                            <i class="fad fa-truck-container"></i>
-                            <span>ارسال از همتا</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-seller-col">
-                    <div class="product-seller-guarantee">
-                        <div class="product-seller-info">
-                            <i class="fad fa-shield-check"></i>
-                            <span>گارانتی ۱۸ ماهه همتا</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-seller-col">
-                    <div class="product-seller-price-action">
-                        <div class="product-seller-price">۵,۵۵۰,۰۰۰<span class="currency">تومان</span></div>
-                        <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
-                                سبد</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-seller">
-                <div class="product-seller-col">
-                    <div class="product-seller-title">
-                        <div class="icon">
-                            <i class="fas fa-store-alt"></i>
-                        </div>
-                        <div class="detail">
-                            <div class="name">همتا <span class="badge badge-light rounded-pill">برگزیده</span>
-                            </div>
-                            <div class="rating">
-                                <span class="value">۹۰.۲٪</span>
-                                <span class="label">رضایت خریداران</span>
-                                <span class="divider">|</span>
-                                <span class="label">عملکرد</span>
-                                <span class="value">عالی</span>
+                            <div class="detail">
+                                <div class="name">{{$product_price->guaranty->name}}<span class="badge badge-light rounded-pill">برگزیده</span>
+                                </div>
+                                <div class="rating">
+                                    <span class="value">۹۰.۲٪</span>
+                                    <span class="label">رضایت خریداران</span>
+                                    <span class="divider">|</span>
+                                    <span class="label">عملکرد</span>
+                                    <span class="value">عالی</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-seller-col">
-                    <div class="product-seller-conditions">
-                        <div class="product-seller-info">
-                            <i class="fad fa-truck-container"></i>
-                            <span>ارسال از همتا</span>
+                    <div class="product-seller-col">
+                        <div class="product-seller-conditions">
+                            <div class="product-seller-info">
+                                <i class="fad fa-truck-container"></i>
+                                <span>ارسال از همتا</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-seller-col">
+                        <div class="product-seller-guarantee">
+                            <div class="product-seller-info">
+                                <i class="fad fa-shield-check"></i>
+                                <span>گارانتی ۱۸ ماهه همتا</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-seller-col">
+                        <div class="product-seller-price-action">
+                            <div class="product-seller-price">{{$product_price->price}}<span class="currency">تومان</span></div>
+                            <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
+                                    سبد</a></div>
                         </div>
                     </div>
                 </div>
-                <div class="product-seller-col">
-                    <div class="product-seller-guarantee">
-                        <div class="product-seller-info">
-                            <i class="fad fa-shield-check"></i>
-                            <span>گارانتی ۱۸ ماهه همتا</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-seller-col">
-                    <div class="product-seller-price-action">
-                        <div class="product-seller-price">۵,۵۵۰,۰۰۰<span class="currency">تومان</span></div>
-                        <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
-                                سبد</a></div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <!-- end sellers -->
         <!-- product-tab-content -->
