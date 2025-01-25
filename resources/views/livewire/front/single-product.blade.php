@@ -1,4 +1,4 @@
-<main class="page-content">
+<main class="page-content" wire:ignore.self>
     <div class="container">
         <div class="row mb-1">
             <div class="col-12">
