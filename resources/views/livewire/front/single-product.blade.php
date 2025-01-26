@@ -132,9 +132,9 @@
                                     </span>
                             <div class="num-block">
                                 <div class="num-in">
-                                    <span class="plus"></span>
-                                    <input wire:model="count" type="text" class="in-num" value="1" readonly="">
-                                    <span class="minus dis"></span>
+                                    <span wire:click="increaseProductCount" class="plus"></span>
+                                    <input wire:model="count" type="text" readonly="">
+                                    <span wire:click="decreaseProductCount" class="minus dis"></span>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            <a href="#" class="add-to-cart">
+                            <a href="#" wire:click.prevent="addToCart" class="add-to-cart">
                                 افزودن به سبد خرید
                             </a>
                         </div>
