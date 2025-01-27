@@ -42,99 +42,59 @@
                         <span class="bag-items-number">3</span>
                     </a>
                 </div>
-                <div class="user-item cart-list">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" width="27">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                        </svg>
-                        <span class="bag-items-number">2</span>
-                    </a>
-                    <ul>
-                        <li class="cart-items">
-                            <ul class="do-nice-scroll">
-                                <li class="cart-item">
+                @auth
+                    <div class="user-item cart-list">
+                        <a href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 stroke-width="1.5" stroke="currentColor" width="27">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                            </svg>
+                            <span class="bag-items-number">{{count($carts)}}</span>
+                        </a>
+                        <ul>
+                            <li class="cart-items">
+                                <ul class="do-nice-scroll">
+                                    @foreach($carts as $cart)
+                                        <li class="cart-item">
                                             <span class="d-flex align-items-center mb-2">
                                                 <a href="#">
-                                                    <img src="{{url('frontend')}}/images/cart/item-1.jpg" alt="">
+                                                    <img src="{{url('images/products/'. $cart->product->image)}}" alt="">
                                                 </a>
                                                 <span>
                                                     <a href="#">
                                                         <span class="title-item">
-                                                            گوشی موبایل شیائومی مدل Redmi 9 ظرفیت 32 گیگابایت
+                                                            {{$cart->product->name}}
                                                         </span>
                                                     </a>
                                                     <span class="color d-flex align-items-center">
                                                         رنگ:
-                                                        <span style="background-color: #8a2be2;"></span>
+                                                        <span style="background-color: {{$cart->color->code}};"></span>
                                                     </span>
                                                 </span>
                                             </span>
-                                    <span class="price">4,050,000 تومان</span>
-                                    <button class="remove-item">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </li>
-                                <li class="cart-item">
-                                            <span class="d-flex align-items-center mb-2">
-                                                <a href="#">
-                                                    <img src="{{url('frontend')}}/images/cart/item-2.jpg" alt="">
-                                                </a>
-                                                <span>
-                                                    <a href="#">
-                                                        <span class="title-item">
-                                                            ساعت مچی هوشمند Haylou LS02
-                                                        </span>
-                                                    </a>
-                                                    <span class="color d-flex align-items-center">
-                                                        رنگ:
-                                                        <span style="background-color: #000;"></span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                    <span class="price">750,000 تومان</span>
-                                    <button class="remove-item">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </li>
-                                <li class="cart-item">
-                                            <span class="d-flex align-items-center mb-2">
-                                                <a href="#">
-                                                    <img src="{{url('frontend')}}/images/cart/item-3.jpg" alt="">
-                                                </a>
-                                                <span>
-                                                    <a href="#">
-                                                        <span class="title-item">
-                                                            هدفون بلوتوثی کیو سی وای مدل T7
-                                                        </span>
-                                                    </a>
-                                                    <span class="color d-flex align-items-center">
-                                                        رنگ:
-                                                        <span style="background-color: #fff;"></span>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                    <span class="price">635,000 تومان</span>
-                                    <button class="remove-item">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="cart-footer d-flex align-items-center justify-content-between">
+                                            <span class="price">{{$cart->product->productPrices->where('color_id', $cart->color_id)->where('guaranty_id',$cart->guaranty_id)->first()->price}} تومان</span>
+                                            <button class="remove-item">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="cart-footer d-flex align-items-center justify-content-between">
                                     <span class="d-flex flex-column">
                                         <span>مبلغ کل:</span>
-                                        <span class="total">4,050,000 تومان</span>
+                                        <span class="total">{{$total_price -$total_discount }} تومان</span>
                                     </span>
-                            <span class="d-block text-center px-2">
+                                <span class="d-block text-center px-2">
                                         <a href="#" class="btn-cart">
                                             ثبت سفارش
                                         </a>
                                     </span>
-                        </li>
-                    </ul>
-                </div>
+                            </li>
+                        </ul>
+                    </div>
+                @endauth
                 <div class="user-item account">
                     <!-- <a href="#" class="btn-auth">
                 <i class="fal fa-user-circle"></i>
