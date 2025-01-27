@@ -115,7 +115,7 @@
                     </div>
                     <hr>
                     <div class="d-flex px-3 py-4">
-                        <a href="#" class="btn btn-danger btn-block py-2">ادامه فرایند خرید</a>
+                        <a href="{{route('shipping')}}" class="btn btn-danger btn-block py-2">ادامه فرایند خرید</a>
                     </div>
                 </div>
             </div>
