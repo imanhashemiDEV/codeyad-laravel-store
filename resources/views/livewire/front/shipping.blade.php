@@ -1,4 +1,4 @@
-<main class="page-content">
+<main class="page-content" wire:ignore.self>
     <div class="container">
         <div class="row mb-4">
             <div class="col-xl-9 col-lg-8 col-md-8 mb-md-0 mb-3">
@@ -19,44 +19,27 @@
                     <div class="checkout-section-content">
                         <div class="checkout-section-title">آدرس تحویل سفارش</div>
                         <div class="row mx-0">
-                            <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio1" name="customRadio"
-                                           class="custom-control-input">
-                                    <label class="custom-control-label address-select" for="customRadio1">
-                                        <span class="head-address-select">به این آدرس ارسال شود</span>
-                                        <span>تهران، بلوار فرحزادی، نبش سیمای ایران</span>
-                                        <span>
+                            @foreach($addresses as $user_address)
+                                <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
+                                    <div class="custom-control custom-radio">
+                                        <input wire:model="selected_address" value="{{$user_address->id}}" type="radio" id="customRadio{{$user_address->id}}" name="customRadio"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label address-select" for="customRadio{{$user_address->id}}">
+                                            <span class="head-address-select">به این آدرس ارسال شود</span>
+                                            <span>{{$user_address->address}}</span>
+                                            <span>
                                                     <i class="fa fa-user"></i>
-                                                    جلال بهرامی راد
+                                                    {{$user_address->name}}
                                                 </span>
-                                        <a href="#" class="link--with-border-bottom edit-address-btn"
-                                           data-toggle="modal" data-target="#editAddressModal">
-                                            ویرایش
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </label>
+                                            <a href="#" class="link--with-border-bottom edit-address-btn"
+                                               data-toggle="modal" data-target="#editAddressModal">
+                                                ویرایش
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" name="customRadio"
-                                           class="custom-control-input">
-                                    <label class="custom-control-label address-select" for="customRadio2">
-                                        <span class="head-address-select">به این آدرس ارسال شود</span>
-                                        <span>تهران، بلوار فرحزادی، نبش سیمای ایران</span>
-                                        <span>
-                                                    <i class="fa fa-user"></i>
-                                                    جلال بهرامی راد
-                                                </span>
-                                        <a href="#" class="link--with-border-bottom edit-address-btn"
-                                           data-toggle="modal" data-target="#editAddressModal">
-                                            ویرایش
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </label>
-                                </div>
-                            </div>
+                            @endforeach
                             <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
                                 <div class="custom-control custom-radio">
                                     <button class="add-address" data-toggle="modal"
@@ -69,7 +52,7 @@
                         <div class="checkout-section-title">شیوه پرداخت</div>
                         <div class="payment-selection">
                             <div class="custom-control custom-radio custom-control-inline mb-3">
-                                <input type="radio" id="paymentSelection1" name="paymentSelection"
+                                <input wire:model="payment_type" value="internet" type="radio" id="paymentSelection1" name="paymentSelection"
                                        class="custom-control-input" checked>
                                 <label class="custom-control-label payment-select" for="paymentSelection1">
                                             <span class="d-flex align-items-center">
@@ -82,7 +65,7 @@
                                 </label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline mb-3">
-                                <input type="radio" id="paymentSelection2" name="paymentSelection"
+                                <input wire:model="payment_type" value="cash" type="radio" id="paymentSelection2" name="paymentSelection"
                                        class="custom-control-input">
                                 <label class="custom-control-label payment-select" for="paymentSelection2">
                                             <span class="d-flex align-items-center">
@@ -138,44 +121,39 @@
             <div class="col-xl-3 col-lg-4 col-md-4">
                 <div class="shadow-around pt-3">
                     <div class="d-flex justify-content-between px-3 py-2">
-                        <span class="text-muted">قیمت کالاها (۳)</span>
+                        <span class="text-muted">قیمت کالاها ({{count($carts)}})</span>
                         <span class="text-muted">
-                                    ۳۱,۳۷۸,۰۰۰
+                                    {{$total_price}}
                                     <span class="text-sm">تومان</span>
                                 </span>
                     </div>
-                    <div class="d-flex justify-content-between px-3 py-2">
-                        <span class="text-muted">تخفیف کالاها</span>
-                        <span class="text-danger">
-                                    (۲٪) ۵۱۰,۰۰۰
+                    @if($total_discount)
+                        <div class="d-flex justify-content-between px-3 py-2">
+                            <span class="text-muted">تخفیف کالاها</span>
+                            <span class="text-danger">
+                                    {{$total_discount}}
                                     <span class="text-sm">تومان</span>
                                 </span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between px-3 py-2">
-                        <span class="font-weight-bold">جمع</span>
-                        <span class="font-weight-bold">
-                                    ۳۰,۸۶۸,۰۰۰
-                                    <span class="text-sm">تومان</span>
-                                </span>
-                    </div>
+                        </div>
+                    @endif
                     <hr>
                     <div class="d-flex justify-content-between px-3 py-2">
                         <span class="font-weight-bold">مبلغ قابل پرداخت</span>
                         <span class="font-weight-bold">
-                                    ۳۰,۸۶۸,۰۰۰
+                                    {{$total_price - $total_discount}}
                                     <span class="text-sm">تومان</span>
                                 </span>
                     </div>
+                    <hr>
                     <div class="d-flex px-3 py-4">
-                        <a href="#" class="btn btn-danger btn-block py-2">پرداخت و ثبت نهایی سفارش</a>
+                        <a href="{{route('shipping')}}" class="btn btn-danger btn-block py-2">پرداخت نهایی</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel"
+    <div wire:ignore.self class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -192,7 +170,7 @@
                                 <div class="text-sm text-muted mb-1">نام و نام خانوادگی:</div>
                                 <div class="text-dark font-weight-bold">
                                     <div class="form-element-row mb-0">
-                                        <input type="text" class="input-element" value="">
+                                        <input wire:model="name" type="text" class="input-element" value="">
                                     </div>
                                 </div>
                             </div>
@@ -200,7 +178,7 @@
                                 <div class="text-sm text-muted mb-1">شماره موبایل:</div>
                                 <div class="text-dark font-weight-bold">
                                     <div class="form-element-row mb-0">
-                                        <input type="text" class="input-element dir-ltr" value="09*********">
+                                        <input wire:model="mobile" type="text" class="input-element dir-ltr" value="09*********">
                                     </div>
                                 </div>
                             </div>
@@ -208,14 +186,15 @@
                                 <div class="text-sm text-muted mb-1">استان:</div>
                                 <div class="text-dark font-weight-bold">
                                     <div class="form-element-row mb-0">
-                                        <select name="" id="" class="select2">
+                                        <select wire:model="province_id" wire:change="changeProvince($event.target.value)" class="form-control">
                                             <option value="0">انتخاب استان</option>
-                                            <option value="1">خراسان شمالی</option>
-                                            <option value="2">تهران</option>
-                                            <option value="3">تبریز</option>
-                                            <option value="4">شیراز</option>
-                                            <option value="5">کرمان</option>
+                                            @foreach($provinces as $key=>$value)
+                                                <option value="{{$key}}">{{$value}}</option>
+                                            @endforeach
                                         </select>
+                                        @error('province_id')
+                                            <p class="alert alert-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -223,14 +202,15 @@
                                 <div class="text-sm text-muted mb-1">شهر:</div>
                                 <div class="text-dark font-weight-bold">
                                     <div class="form-element-row mb-0">
-                                        <select name="" id="" class="select2">
+                                        <select  wire:model="city_id" class="form-control">
                                             <option value="0">انتخاب شهر</option>
-                                            <option value="1">بجنورد</option>
-                                            <option value="2">شیروان</option>
-                                            <option value="3">اسفراین</option>
-                                            <option value="4">مانه و سملقان</option>
-                                            <option value="5">راز و جرگلان</option>
+                                            @foreach($cities as $key=>$value)
+                                                <option value="{{$key}}">{{$value}}</option>
+                                            @endforeach
                                         </select>
+                                        @error('city_id')
+                                        <p class="alert alert-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -238,19 +218,31 @@
                                 <div class="text-sm text-muted mb-1">آدرس کامل:</div>
                                 <div class="text-dark font-weight-bold">
                                     <div class="form-element-row mb-0">
-                                            <textarea name="address" id="address" cols="30" rows="10"
+                                            <textarea wire:model="address" name="address" id="address" cols="30" rows="10"
                                                       class="input-element"></textarea>
                                     </div>
+                                    @error('address')
+                                    <p class="alert alert-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">ذخیره تغییرات <i
+                    <button type="button" wire:click="createAddress" class="btn btn-primary">ذخیره تغییرات <i
                             class="fad fa-money-check-edit"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </main>
+
+@script
+<script>
+    $wire.on('close-modal', () => {
+       $("#addAddressModal").modal('toggle');
+    });
+</script>
+
+@endscript

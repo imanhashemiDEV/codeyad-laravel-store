@@ -87,7 +87,7 @@
                                         <span class="total">{{$total_price -$total_discount }} تومان</span>
                                     </span>
                                 <span class="d-block text-center px-2">
-                                        <a href="#" class="btn-cart">
+                                        <a href="{{route('shipping')}}" class="btn-cart">
                                             ثبت سفارش
                                         </a>
                                     </span>

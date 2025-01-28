@@ -208,6 +208,8 @@ return [
         'gift_price'=>'قیمت کارت هدیه',
         'expiration_date'=>'تاریخ انقضا',
         'code'=>'کد',
+        'province_id'=>'استان',
+        'city_id'=>'شهر',
 
 
     ],
