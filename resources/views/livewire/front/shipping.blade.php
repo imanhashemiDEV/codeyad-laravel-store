@@ -146,7 +146,7 @@
                     </div>
                     <hr>
                     <div class="d-flex px-3 py-4">
-                        <a href="{{route('shipping')}}" class="btn btn-danger btn-block py-2">پرداخت نهایی</a>
+                        <a href="" wire:click.prevent="payment" class="btn btn-danger btn-block py-2">پرداخت نهایی</a>
                     </div>
                 </div>
             </div>
