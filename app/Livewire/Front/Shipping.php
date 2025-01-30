@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Shetabit\Multipay\Invoice;
 
 class Shipping extends Component
 {
@@ -66,7 +67,7 @@ class Shipping extends Component
         $this->dispatch('close-modal');
     }
 
-    public function payment(): void
+    public function payment()
     {
         $this->validate([
             'selected_address'=>'required',
@@ -102,8 +103,20 @@ class Shipping extends Component
             DB::commit();
 
             // send to zarinpal
+            $pay_price = $this->total_price - $this->total_discount;
+            $result =  \Shetabit\Payment\Facade\Payment::purchase(
+                (new Invoice)->amount($pay_price),
+                function($driver, $transactionId) use ($order) {
+                     $order->update([
+                         'transaction_id'=>$transactionId
+                     ]);
+                }
+            )->pay()->toJson();
 
-        }catch (\Exeption $exeption){
+            return $this->redirect(json_decode($result)->action);
+
+
+        }catch (\Exception $exeption){
             Log::error($exeption->getMessage());
             DB::rollBack();
         }
