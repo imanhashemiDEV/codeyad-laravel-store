@@ -75,6 +75,7 @@ class Shipping extends Component
         ]);
         DB::beginTransaction();
         try {
+
             $order = Order::query()->create([
                 'user_id'=> auth()->user()->id,
                 'address_id'=>$this->selected_address,
@@ -102,33 +103,33 @@ class Shipping extends Component
             }
             DB::commit();
 
-            // send to zarinpal
-            $pay_price = $this->total_price - $this->total_discount;
-            $result =  \Shetabit\Payment\Facade\Payment::purchase(
-                (new Invoice)->amount($pay_price),
-                function($driver, $transactionId) use ($order) {
-                     $order->update([
-                         'transaction_id'=>$transactionId
-                     ]);
-                }
-            )->pay()->toJson();
 
-            return $this->redirect(json_decode($result)->action);
-
+            if($this->payment_type === "internet"){
+                // send to zarinpal
+                $pay_price = $this->total_price - $this->total_discount;
+                $result =  \Shetabit\Payment\Facade\Payment::purchase(
+                    (new Invoice)->amount($pay_price),
+                    function($driver, $transactionId) use ($order) {
+                        $order->update([
+                            'transaction_id'=>$transactionId
+                        ]);
+                    }
+                )->pay()->toJson();
+                return $this->redirect(json_decode($result)->action);
+            }else{
+                 // return view
+            }
 
         }catch (\Exception $exeption){
             Log::error($exeption->getMessage());
             DB::rollBack();
         }
-
-
     }
 
     #[Layout('frontend.master'),Title('صفحه آدرس و پرداخت')]
     public function render():View
     {
         $addresses = Address::query()->where('user_id',auth()->user()->id)->get();
-
 
         return view('livewire.front.shipping', compact('addresses'));
     }

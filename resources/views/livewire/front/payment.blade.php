@@ -22,15 +22,10 @@
                                 <div class="icon-message success-icon">
                                     <i class="fas fa-check"></i>
                                 </div>
-                                سفارش <span class="order-code">DKC-355127574</span> با موفقیت پرداخت و ثبت گردید.
+                                سفارش <span class="order-code">{{$order->order_code}}</span>
+                                پرداخت انجام شد
                             </div>
-                            <div class="text-center text-muted">
-                                <p class="mb-4">
-                                    پرداخت با موفقیت انجام شد. سفارش شما با موفقیت ثبت شد و در
-                                    زمان تعیین‌شده برای شما ارسال خواهد شد. از اینکه ما را برای خرید انتخاب کردید از
-                                    شما سپاسگزاریم.
-                                </p>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -39,20 +34,20 @@
                         <div class="d-flex justify-content-between px-3 py-2">
                             <span class="text-muted">نام تحویل گیرنده:</span>
                             <span class="text-muted">
-                                    جلال بهرامی راد
+                                    {{$order->address->name}}
                                 </span>
                         </div>
                         <div class="d-flex justify-content-between px-3 py-2">
                             <span class="text-muted">شماره تماس :</span>
                             <span class="text-danger">
-                                    09121234567
+                                    {{$order->address->mobile}}
                                 </span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between px-3 py-2">
                             <span class="font-weight-bold">مبلغ کل:</span>
                             <span class="font-weight-bold">
-                                    ۳۰,۸۶۸,۰۰۰
+                                    {{$order->total_price - $order->total_discount}}
                                     <span class="text-sm">تومان</span>
                                 </span>
                         </div>
@@ -60,7 +55,7 @@
                         <div class="px-3 py-2">
                             <span class="text-muted d-block">آدرس :</span>
                             <span class="text-info">
-                                    تهران، بلوار فرحزادی، نبش سیمای ایران
+                                    {{$order->address->address}}
                                 </span>
                         </div>
                         <div class="px-3 py-4">
@@ -103,13 +98,13 @@
                         <div class="d-flex justify-content-between px-3 py-2">
                             <span class="text-muted">نام تحویل گیرنده:</span>
                             <span class="text-muted">
-                                    {{$order->name}}
+                                    {{$order->address->name}}
                                 </span>
                         </div>
                         <div class="d-flex justify-content-between px-3 py-2">
                             <span class="text-muted">شماره تماس :</span>
                             <span class="text-danger">
-                                    {{$order->mobile}}
+                                    {{$order->address->mobile}}
                                 </span>
                         </div>
                         <hr>
