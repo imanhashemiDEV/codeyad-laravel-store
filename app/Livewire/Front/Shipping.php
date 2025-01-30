@@ -8,6 +8,8 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Province;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -64,35 +66,48 @@ class Shipping extends Component
         $this->dispatch('close-modal');
     }
 
-    public function payment()
+    public function payment(): void
     {
-        $order = Order::query()->create([
-            'user_id'=> auth()->user()->id,
-            'address_id'=>$this->selected_address,
-            'order_code'=> generateRandomInteger(6),
-            'total_price'=>$this->total_price,
-            'total_discount'=>$this->total_discount,
-            'payment_type'=>$this->payment_type
+        $this->validate([
+            'selected_address'=>'required',
+            'payment_type'=>'required',
         ]);
+        DB::beginTransaction();
+        try {
+            $order = Order::query()->create([
+                'user_id'=> auth()->user()->id,
+                'address_id'=>$this->selected_address,
+                'order_code'=> generateRandomInteger(6),
+                'total_price'=>$this->total_price,
+                'total_discount'=>$this->total_discount,
+                'payment_type'=>$this->payment_type
+            ]);
 
-        $carts = \App\Models\Cart::query()
-            ->where('user_id', auth()->user()->id)
-            ->get();
+            $carts = \App\Models\Cart::query()
+                ->where('user_id', auth()->user()->id)
+                ->get();
 
-        foreach ($carts as $cart){
-          OrderDetail::query()->create([
-              'order_id'=>$order->id,
-              'product_id'=>$cart->product_id,
-              'guaranty_id'=>$cart->guaranty_id,
-              'color_id'=>$cart->color_id,
-              'main_price'=>$cart->product->productPrices->where('color_id', $cart->color_id)->where('guaranty_id',$cart->guaranty_id)->first()->main_price,
-              'price'=>$cart->product->productPrices->where('color_id', $cart->color_id)->where('guaranty_id',$cart->guaranty_id)->first()->price,
-              'discount'=>$cart->product->productPrices->where('color_id', $cart->color_id)->where('guaranty_id',$cart->guaranty_id)->first()->discount,
-              'count'=>$cart->count,
-          ]);
+            foreach ($carts as $cart){
+                OrderDetail::query()->create([
+                    'order_id'=>$order->id,
+                    'product_id'=>$cart->product_id,
+                    'guaranty_id'=>$cart->guaranty_id,
+                    'color_id'=>$cart->color_id,
+                    'main_price'=>$cart->product->productPrices->where('color_id', $cart->color_id)->where('guaranty_id',$cart->guaranty_id)->first()->main_price,
+                    'price'=>$cart->product->productPrices->where('color_id', $cart->color_id)->where('guaranty_id',$cart->guaranty_id)->first()->price,
+                    'discount'=>$cart->product->productPrices->where('color_id', $cart->color_id)->where('guaranty_id',$cart->guaranty_id)->first()->discount,
+                    'count'=>$cart->count,
+                ]);
+            }
+            DB::commit();
 
+            // send to zarinpal
 
+        }catch (\Exeption $exeption){
+            Log::error($exeption->getMessage());
+            DB::rollBack();
         }
+
 
     }
 

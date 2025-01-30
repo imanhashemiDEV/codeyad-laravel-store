@@ -13,6 +13,7 @@
         "livewire/livewire": "^3.5",
         "melipayamak/laravel": "1.0.0",
         "realrashid/sweet-alert": "^7.2",
+        "shetabit/payment": "^5.8",
         "spatie/laravel-permission": "^6.10",
         "wireui/wireui": "^2.2"
     },

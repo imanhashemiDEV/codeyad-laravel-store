@@ -18,6 +18,9 @@
                     </div>
                     <div class="checkout-section-content">
                         <div class="checkout-section-title">آدرس تحویل سفارش</div>
+                        @error('selected_address')
+                        <p class="alert alert-danger">{{ $message }}</p>
+                        @enderror
                         <div class="row mx-0">
                             @foreach($addresses as $user_address)
                                 <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
@@ -50,6 +53,9 @@
                             </div>
                         </div>
                         <div class="checkout-section-title">شیوه پرداخت</div>
+                        @error('payment_type')
+                            <p class="alert alert-danger">{{ $message }}</p>
+                        @enderror
                         <div class="payment-selection">
                             <div class="custom-control custom-radio custom-control-inline mb-3">
                                 <input wire:model="payment_type" value="internet" type="radio" id="paymentSelection1" name="paymentSelection"

@@ -210,6 +210,8 @@ return [
         'code'=>'کد',
         'province_id'=>'استان',
         'city_id'=>'شهر',
+        'selected_address'=>'آدرس کاربر',
+        'payment_type'=>'نحوه پرداخت',
 
 
     ],
