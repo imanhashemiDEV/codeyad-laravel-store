@@ -18,7 +18,7 @@ class UserApiController extends Controller
 
         return response()->json([
             'result' => true,
-            'message' => "user found",
+            'message' => "user list",
             'data' => $users
         ],200);
     }
@@ -30,7 +30,7 @@ class UserApiController extends Controller
     {
         $user = User::query()->create([
             'name'=>$request->input('name'),
-            'mobile'=>$request->get('mobile'),
+            'email'=>$request->get('email'),
             'password'=>Hash::make($request->password),
         ]);
         return response()->json([
@@ -45,10 +45,11 @@ class UserApiController extends Controller
      */
     public function show(string $id)
     {
+        $user = User::query()->findOrFail($id);
         return response()->json([
             'result' => true,
-            'message' => "user found",
-            'data' => 'show'
+            'message' => "user is found",
+            'data' => $user
         ]);
     }
 
@@ -57,10 +58,16 @@ class UserApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $user = User::query()->findOrFail($id);
+        $user->update([
+            'name'=>$request->input('name') ?? $user->name,
+            'email'=>$request->get('email') ?? $user->email,
+            'password'=>Hash::make($request->password) ?? $user->password,
+        ]);
         return response()->json([
             'result' => true,
-            'message' => "user found",
-            'data' => 'update'
+            'message' => "user is updated",
+            'data' => $user
         ]);
     }
 
@@ -69,10 +76,11 @@ class UserApiController extends Controller
      */
     public function destroy(string $id)
     {
+        User::query()->findOrFail($id)->delete();
         return response()->json([
             'result' => true,
-            'message' => "user found",
-            'data' => 'destroy'
+            'message' => "user is deleted",
+            'data' => []
         ]);
     }
 
