@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 
 //Route::apiResource('/users', \App\Http\Controllers\Api\V1\UserApiController::class)->except(['show']);
 
-Route::apiResource('/users', \App\Http\Controllers\Api\V1\UserApiController::class);
 
-Route::post('/foo', [\App\Http\Controllers\Api\V1\UserApiController::class, 'foo']);
+
+Route::post('/foo', [UserApiController::class, 'foo']);
+
+
+Route::prefix('/v1')->group(function(){
+    Route::apiResource('/users', UserApiController::class);
+});

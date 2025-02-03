@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserApiController extends Controller
 {
@@ -12,10 +14,12 @@ class UserApiController extends Controller
      */
     public function index()
     {
+        $users = User::query()->paginate(3);
+
         return response()->json([
             'result' => true,
             'message' => "user found",
-            'data' => 'index'
+            'data' => $users
         ],200);
     }
 
@@ -24,10 +28,15 @@ class UserApiController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::query()->create([
+            'name'=>$request->input('name'),
+            'mobile'=>$request->get('mobile'),
+            'password'=>Hash::make($request->password),
+        ]);
         return response()->json([
             'result' => true,
-            'message' => "user found",
-            'data' => 'store'
+            'message' => "user is created",
+            'data' => $user
         ]);
     }
 
