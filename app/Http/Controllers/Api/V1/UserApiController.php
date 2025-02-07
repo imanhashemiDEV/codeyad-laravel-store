@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Exceptions\getUserException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserApiRequest;
 use App\Models\User;
@@ -47,12 +48,12 @@ class UserApiController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::query()->findOrFail($id);
-        return response()->json([
-            'result' => true,
-            'message' => "user is found",
-            'data' => $user
-        ]);
+            $user = User::query()->with('addresses')->findOrFail($id);
+            return response()->json([
+                'result' => true,
+                'message' => "user is found",
+                'data' => $user
+            ]);
     }
 
     /**
