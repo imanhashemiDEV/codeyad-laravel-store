@@ -26,15 +26,16 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (\Illuminate\Validation\ValidationException $exception , Request $request) {
-            if($request->is('api/*')){
-                return response()->json([
-                    'result' => false,
-                    'message' => "اطلاعات را کامل وارد کنید",
-                    'data' => []
-                ],\Illuminate\Http\Response::HTTP_UNPROCESSABLE_ENTITY);
-            }
-        });
+
+//        $exceptions->render(function (\Illuminate\Validation\ValidationException $exception , Request $request) {
+//            if($request->is('api/*')){
+//                return response()->json([
+//                    'result' => false,
+//                    'message' => $exception->getMessage(),
+//                    'data' => []
+//                ],\Illuminate\Http\Response::HTTP_UNPROCESSABLE_ENTITY);
+//            }
+//        });
 
         $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $exception , Request $request) {
             if($request->is('api/*')){

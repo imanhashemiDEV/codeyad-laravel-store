@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\ApiRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserApiRequest extends FormRequest
+class CreateUserApiRequest extends BaseApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.

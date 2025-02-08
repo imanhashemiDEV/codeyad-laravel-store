@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Exceptions\getUserException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUserApiRequest;
+use App\Http\Requests\ApiRequests\CreateUserApiRequest;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,9 +28,8 @@ class UserApiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUserApiRequest $request)
+    public function store(CreateUserApiRequest $request): JsonResponse
     {
-
         $user = User::query()->create([
             'name'=>$request->input('name'),
             'email'=>$request->get('email'),
@@ -46,7 +45,7 @@ class UserApiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
             $user = User::query()->with('addresses')->findOrFail($id);
             return response()->json([
