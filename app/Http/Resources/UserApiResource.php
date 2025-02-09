@@ -18,7 +18,7 @@ class UserApiResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'email'=>$this->email,
-            'addresses'=> UserAddressApiResource::collection($this->addresses)
+//            'addresses'=> UserAddressApiResource::collection($this->addresses)
         ];
     }
 }
