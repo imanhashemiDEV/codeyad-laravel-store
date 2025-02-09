@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApiRequests\CreateUserApiRequest;
+use App\Http\Resources\UserApiResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,14 +15,14 @@ class UserApiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        $users = User::query()->paginate(3);
+        $users = User::query()->get();
 
         return response()->json([
             'result' => true,
             'message' => "user list",
-            'data' => $users
+            'data' => UserApiResource::collection($users)
         ],200);
     }
 
@@ -51,7 +52,7 @@ class UserApiController extends Controller
             return response()->json([
                 'result' => true,
                 'message' => "user is found",
-                'data' => $user
+                'data' => new UserApiResource($user)
             ]);
     }
 

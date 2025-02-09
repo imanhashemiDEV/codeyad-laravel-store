@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles, UserAccess;
 
-    protected $appends=['foo'];
+//    protected $appends=['foo'];
 
     /**
      * The attributes that are mass assignable.
@@ -63,8 +63,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Address::class);
     }
 
-    public function getFooAttribute()
-    {
-        return 'bar';
-    }
+//    public function getFooAttribute()
+//    {
+//        return 'bar';
+//    }
+
 }
