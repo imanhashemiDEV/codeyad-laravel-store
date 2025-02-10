@@ -67,17 +67,27 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-        $exceptions->respond(function (Response $response) {
-            if($response->getStatusCode() === 500){
-
-                    return response()->json([
-                        'result' => false,
-                        'message' => "خطای سمت سرور",
-                        'data' => []
-                    ],500);
-
+        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $exception , Request $request) {
+            if($request->is('api/*')){
+                return response()->json([
+                    'result' => false,
+                    'message' => "توکن اشتباه می باشد",
+                    'data' => []
+                ],\Illuminate\Http\Response::HTTP_UNAUTHORIZED);
             }
-
-            return  $response;
         });
+
+//        $exceptions->respond(function (Response $response) {
+//            if($response->getStatusCode() === 500){
+//
+//                    return response()->json([
+//                        'result' => false,
+//                        'message' => "خطای سمت سرور",
+//                        'data' => []
+//                    ],500);
+//
+//            }
+//
+//            return  $response;
+//        });
     })->create();

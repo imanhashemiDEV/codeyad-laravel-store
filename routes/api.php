@@ -38,5 +38,11 @@ Route::prefix('/v1')->group(function(){
 //    Route::delete('/users/{id}',[UserApiController::class,'destroy']);
 
     Route::post('/register',[AuthApiController::class, 'register']);
+    Route::post('/login',[AuthApiController::class, 'login']);
 });
 
+
+Route::prefix('/v1')->middleware('auth:sanctum')->group(function(){
+    Route::post('/get_user',[AuthApiController::class, 'getUser']);
+    Route::delete('/delete_user',[AuthApiController::class, 'deleteUser']);
+});

@@ -36,8 +36,7 @@ class UserList extends Component
 
     public function mount()
     {
-        $this->roles = Role::query()
-            ->pluck('name', 'id');
+
     }
 
     public function createRow(): void
@@ -113,6 +112,8 @@ class UserList extends Component
     #[Layout('admin.master'),Title('لیست کاربران')]
     public function render():View
     {
+        $this->roles = Role::query()
+            ->pluck('name', 'id');
         return view('livewire.admin.users.user-list');
     }
 }
