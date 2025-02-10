@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AuthApiController;
 use App\Http\Controllers\Api\V1\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,4 +36,7 @@ Route::prefix('/v1')->group(function(){
 //    Route::get('/users/{id}',[UserApiController::class,'show']);
 //    Route::put('/users/{id}',[UserApiController::class,'update']);
 //    Route::delete('/users/{id}',[UserApiController::class,'destroy']);
+
+    Route::post('/register',[AuthApiController::class, 'register']);
 });
+
