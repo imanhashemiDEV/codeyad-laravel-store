@@ -21,14 +21,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Permission::query()->with('roles')->each(function ($permission){
-            Gate::define($permission->name, function ($user) use ($permission){
-                foreach ($user->roles as $role){
-                    if($role->hasPermissionTo($permission)){
-                       return true;
-                    }
-                }
-            });
-        });
+//        Permission::query()->with('roles')->each(function ($permission){
+//            Gate::define($permission->name, function ($user) use ($permission){
+//                foreach ($user->roles as $role){
+//                    if($role->hasPermissionTo($permission)){
+//                       return true;
+//                    }
+//                }
+//            });
+//        });
     }
 }

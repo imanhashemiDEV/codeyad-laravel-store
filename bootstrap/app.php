@@ -28,6 +28,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin'=>\App\Http\Middleware\AdminMiddleware::class,
             'verified_mobile'=>\App\Http\Middleware\MobileVerificatedMiddleware::class,
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
@@ -66,7 +69,17 @@ return Application::configure(basePath: dirname(__DIR__))
             if($request->is('api/*')){
                 return response()->json([
                     'result' => false,
-                    'message' => "نیاز به احراز هویت می باشد",
+                    'message' => "شما به این بخش دسترسی ندارید",
+                    'data' => []
+                ],\Illuminate\Http\Response::HTTP_UNAUTHORIZED);
+            }
+        });
+
+        $exceptions->render(function (\Spatie\Permission\Exceptions\UnauthorizedException $exception , Request $request) {
+            if($request->is('api/*')){
+                return response()->json([
+                    'result' => false,
+                    'message' => "شما به این بخش دسترسی ندارید",
                     'data' => []
                 ],\Illuminate\Http\Response::HTTP_UNAUTHORIZED);
             }

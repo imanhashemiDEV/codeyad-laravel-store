@@ -43,6 +43,6 @@ Route::prefix('/v1')->group(function(){
 
 
 Route::prefix('/v1')->middleware('auth:sanctum')->group(function(){
-    Route::post('/get_user',[AuthApiController::class, 'getUser']);
+    Route::post('/get_user',[AuthApiController::class, 'getUser'])->middleware(['permission:ویرایش محصول']);
     Route::delete('/delete_user',[AuthApiController::class, 'deleteUser']);
 });
