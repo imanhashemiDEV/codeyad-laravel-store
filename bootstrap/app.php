@@ -1,11 +1,16 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -37,7 +42,7 @@ return Application::configure(basePath: dirname(__DIR__))
 //            }
 //        });
 
-        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $exception , Request $request) {
+        $exceptions->render(function (NotFoundHttpException $exception , Request $request) {
             if($request->is('api/*')){
                 return response()->json([
                     'result' => false,
@@ -47,7 +52,7 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException $exception , Request $request) {
+        $exceptions->render(function (MethodNotAllowedHttpException $exception , Request $request) {
             if($request->is('api/*')){
                 return response()->json([
                     'result' => false,
@@ -57,7 +62,7 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-        $exceptions->render(function (\Illuminate\Validation\UnauthorizedException $exception , Request $request) {
+        $exceptions->render(function (UnauthorizedException $exception , Request $request) {
             if($request->is('api/*')){
                 return response()->json([
                     'result' => false,
@@ -67,7 +72,7 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $exception , Request $request) {
+        $exceptions->render(function (AuthenticationException $exception , Request $request) {
             if($request->is('api/*')){
                 return response()->json([
                     'result' => false,
@@ -77,17 +82,36 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-//        $exceptions->respond(function (Response $response) {
-//            if($response->getStatusCode() === 500){
-//
-//                    return response()->json([
-//                        'result' => false,
-//                        'message' => "خطای سمت سرور",
-//                        'data' => []
-//                    ],500);
-//
-//            }
-//
-//            return  $response;
-//        });
+        $exceptions->render(function (AccessDeniedHttpException $exception , Request $request) {
+            if($request->is('api/*')){
+                return response()->json([
+                    'result' => false,
+                    'message' => "شما به این بخش دسترسی ندارید",
+                    'data' => []
+                ],\Illuminate\Http\Response::HTTP_UNAUTHORIZED);
+            }
+        });
+
+        $exceptions->render(function (ErrorException $exception , Request $request) {
+            if($request->is('api/*')){
+                return response()->json([
+                    'result' => false,
+                    'message' => "خطا سرور",
+                    'data' => []
+                ],500);
+            }
+        });
+
+        $exceptions->respond(function (Response $response) {
+            if($response->getStatusCode() === 500 && $response->headers->get('Content-Type')==='application/json'){
+
+                    return response()->json([
+                        'result' => false,
+                        'message' => "خطای سمت سرور",
+                        'data' => []
+                    ],500);
+            }
+
+            return  $response;
+        });
     })->create();

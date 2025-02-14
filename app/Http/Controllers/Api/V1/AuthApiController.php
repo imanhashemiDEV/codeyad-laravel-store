@@ -8,6 +8,7 @@ use App\Http\Resources\UserApiResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class AuthApiController extends Controller
@@ -56,9 +57,10 @@ class AuthApiController extends Controller
     public function getUser(): JsonResponse
     {
         $user = auth()->user();
+        //Gate::authorize('ویرایش محصول',$user);
         return response()->json([
             'result' => true,
-            'message' => "user is created",
+            'message' => "user is founded",
             'data' => [
                 'user'=> new UserApiResource($user),
             ]

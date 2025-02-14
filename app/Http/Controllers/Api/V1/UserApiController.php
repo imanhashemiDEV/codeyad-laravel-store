@@ -52,12 +52,14 @@ class UserApiController extends Controller
      */
     public function show(string $id): JsonResponse
     {
+
             $user = User::query()->with('addresses')->findOrFail($id);
             return response()->json([
                 'result' => true,
                 'message' => "user is found",
                 'data' => new UserApiResource($user)
             ]);
+
     }
 
     /**
