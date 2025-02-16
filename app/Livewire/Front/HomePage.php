@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Front;
 
+use App\Jobs\SendVerificationEmailJob;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,7 +13,10 @@ use Livewire\Component;
 
 class HomePage extends Component
 {
-
+    public function mount()
+    {
+        SendVerificationEmailJob::dispatch();
+     }
     #[Computed(persist: true,seconds: 27000)]
     public function newestProducts(): Collection
     {
