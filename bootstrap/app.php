@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function (){
             Route::prefix('admin')
-                ->middleware(['web', 'auth','verified_mobile','admin'])
+                ->middleware(['web', 'auth','verified','verified_mobile','admin'])
                 ->group(base_path('routes/admin.php'));
         }
     )

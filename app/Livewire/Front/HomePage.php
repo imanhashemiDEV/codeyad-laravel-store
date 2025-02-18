@@ -13,10 +13,6 @@ use Livewire\Component;
 
 class HomePage extends Component
 {
-    public function mount()
-    {
-        SendVerificationEmailJob::dispatch();
-     }
     #[Computed(persist: true,seconds: 27000)]
     public function newestProducts(): Collection
     {
