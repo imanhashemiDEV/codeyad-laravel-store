@@ -15,10 +15,13 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->intended(route('home', absolute: false));
         }
 
-        SendVerificationEmailJob::dispatch($request->user())->onQueue('sendEmailVerification');
+        //SendVerificationEmailJob::dispatch($request->user())->onQueue('sendEmailVerification');
+        SendVerificationEmailJob::dispatch($request->user())->delay(
+            now()->addMinutes(10)
+        );
 
         return back()->with('status', 'verification-link-sent');
     }
