@@ -3,6 +3,7 @@
 namespace App\Livewire\Front;
 
 use App\Enums\OrderStatus;
+use App\Jobs\DeleteCancelledOrderJob;
 use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
@@ -42,6 +43,7 @@ class Payment extends Component
             $this->order->update([
                 'status'=>OrderStatus::Canceled->value
             ]);
+            DeleteCancelledOrderJob::dispatch($this->order)->delay( now()->addDays(10));
         }
     }
     #[Layout('frontend.master'),Title('صفحه نتیجه پرداخت')]

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Front;
 
+use App\Jobs\DeletePendingCartJob;
 use App\Models\Product;
 use App\Models\ProductPrice;
 use Illuminate\Contracts\View\View;
@@ -57,7 +58,7 @@ class SingleProduct extends Component
        $this->max_sell = $new_product->max_sell;
     }
 
-    public function addToCart()
+    public function addToCart(): void
     {
         if (auth()->user()){
             $cart = \App\Models\Cart::query()
@@ -79,6 +80,7 @@ class SingleProduct extends Component
                     'count'=>$this->count
                 ]);
             }
+             DeletePendingCartJob::dispatch($cart)->delay(now()->addDays(30));
             $this->redirectRoute('user.cart');
         }else{
             $this->redirectRoute('login');
