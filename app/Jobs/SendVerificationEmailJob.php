@@ -12,8 +12,19 @@ class SendVerificationEmailJob implements ShouldQueue
     use Queueable;
    // public $user;
 
-    public $tries =3;
-    public $backoff=[60,600,6000];
+    //public $tries =3;
+   // public $backoff=[60,600,6000];
+    public $backoff=3600;
+    public $maxException = 5;
+
+//    public function tries(): int{
+//        return 5;
+//    }
+
+//    public function backoff(): int
+//    {
+//        return 3600;
+//    }
 
     /**
      * Create a new job instance.
@@ -22,6 +33,16 @@ class SendVerificationEmailJob implements ShouldQueue
     {
       // $this->user = $user;
         $this->onQueue('sendEmailVerification');
+    }
+
+    public function retryUntil(): \Illuminate\Support\Carbon
+    {
+        return  now()->addHours(10);
+    }
+
+    public function failed(\Throwable $exception)
+    {
+       Log::error($exception->getMessage());
     }
 
     /**

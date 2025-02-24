@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\checkUserMobileCodeRequest;
 use App\Models\VerificationCode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MobileVerificationController extends Controller
 {
@@ -24,7 +25,7 @@ class MobileVerificationController extends Controller
             'code'=>$code,
         ]);
 
-        MelipayamakService::sendSMS($user->mobile,$code);
+       $response = MelipayamakService::sendSMS($user->mobile,$code);
 
          return redirect()->route('show.check.code');
     }

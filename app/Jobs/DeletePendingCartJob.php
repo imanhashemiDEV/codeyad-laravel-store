@@ -11,7 +11,7 @@ class DeletePendingCartJob implements ShouldQueue
     use Queueable;
 
     public $tries = 3;
-    public $backoff = 3600 * 24 * 7;
+    public $backoff = 604800;
 
     /**
      * Create a new job instance.
