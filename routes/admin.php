@@ -54,3 +54,8 @@ Route::get('/create_product_prices/{product}', CreateProductPrice::class)->name(
 Route::get('/edit_product_prices/{product_price}', EditProductPrice::class)->name('admin.edit.product.prices');
 Route::get('/product_properties/{product}', ProductProperties::class)->name('admin.product.properties');
 Route::get('/product_gallery/{product}', ProductGallery::class)->name('admin.product.gallery');
+
+
+
+
+Route::get('/new_year_campaign', [\App\Http\Controllers\Admin\CampaignController::class,'newYearNotification'])->name('admin.notification.new_year');
