@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\Admin\CampaignController;
+use App\Http\Controllers\Admin\NotificationUsersController;
 use App\Livewire\Admin\Brands\BrandList;
 use App\Livewire\Admin\Categories\CategoryAttributes;
 use App\Livewire\Admin\Categories\CategoryList;
@@ -58,4 +60,6 @@ Route::get('/product_gallery/{product}', ProductGallery::class)->name('admin.pro
 
 
 
-Route::get('/new_year_campaign', [\App\Http\Controllers\Admin\CampaignController::class,'newYearNotification'])->name('admin.notification.new_year');
+Route::get('/new_year_campaign', [CampaignController::class,'newYearNotification'])->name('admin.notification.new_year');
+
+Route::get('/notification_to_all_users', [NotificationUsersController::class,'notificationToAllUsers'])->name('admin.notification.all_users');
