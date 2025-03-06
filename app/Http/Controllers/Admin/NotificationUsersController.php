@@ -8,6 +8,7 @@ use App\Jobs\EmailToAllUsersJob;
 use App\Jobs\NotificationToAllUsersJob;
 use App\Jobs\SMSToAllUsersJob;
 use App\Models\User;
+use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
@@ -34,19 +35,28 @@ class NotificationUsersController extends Controller
 //        })->onQueue('chain-notification')->dispatch();
 
 
-//        $batch = Bus::batch([
-//            ...$jobs,
-//            function () {
-//                Log::info('jobs done');
-//            }
-//        ])->catch(function (Throwable $e) {
-//            Log::error($e->getMessage());
-//        })->onQueue('chain-notification')
-//            ->name('new_year')
-//            ->dispatch();
+        $batch = Bus::batch([
+            ...$jobs,
+            function () {
+                Log::info('jobs done');
+            }
+        ])->before(function (Batch $batch) {
+            // The batch has been created but no jobs have been added...
+        })->progress(function (Batch $batch) {
+            // A single job has completed successfully...
+        })->then(function (Batch $batch) {
+            // All jobs completed successfully...
+        })->catch(function (Batch $batch, Throwable $e) {
+            // First batch job failure detected...
+        })->finally(function (Batch $batch) {
+            // The batch has finished executing...
+        })->onQueue('batch-notification')
+            ->name('new_year')
+            ->allowFailures()
+            ->dispatch();
 
-       $campaign = Bus::findBatch("9e588744-409f-4cb0-b6e8-900387259229");
+      // $campaign = Bus::findBatch("9e588744-409f-4cb0-b6e8-900387259229");
        //dd($campaign->progress());
-       dd($campaign->cancel());
+      // dd($campaign->cancel());
     }
 }

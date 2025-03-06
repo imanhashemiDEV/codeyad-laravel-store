@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Support\Facades\Log;
+use PHPUnit\Event\Code\Throwable;
 
 class SMSToAllUsersJob implements ShouldQueue
 {
@@ -33,6 +34,7 @@ class SMSToAllUsersJob implements ShouldQueue
      */
     public function handle(): void
     {
+        throw new \Exception('error');
 //        if($this->batch()->cancelled())
 //            return;
 
@@ -47,5 +49,10 @@ class SMSToAllUsersJob implements ShouldQueue
 //                 $this->delete();
 //             }
 //        }
+    }
+
+    public function failed(Throwable $throwable)
+    {
+
     }
 }
