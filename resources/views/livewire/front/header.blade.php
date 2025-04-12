@@ -32,23 +32,24 @@
                 </div>
             </div>
             <div class="user-items">
-                <div class="user-item">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" width="27">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                        <span class="bag-items-number">3</span>
-                    </a>
-                </div>
+
                 @auth
+                    <div class="user-item">
+                        <a href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 stroke-width="1.5" stroke="currentColor" width="27">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                            </svg>
+                            <span class="bag-items-number">3</span>
+                        </a>
+                    </div>
                     <div class="user-item cart-list">
                         <a href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke-width="1.5" stroke="currentColor" width="27">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                      d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/>
                             </svg>
                             <span class="bag-items-number">{{count($carts)}}</span>
                         </a>
@@ -59,7 +60,8 @@
                                         <li class="cart-item">
                                             <span class="d-flex align-items-center mb-2">
                                                 <a href="#">
-                                                    <img src="{{url('images/products/'. $cart->product->image)}}" alt="">
+                                                    <img src="{{url('images/products/'. $cart->product->image)}}"
+                                                         alt="">
                                                 </a>
                                                 <span>
                                                     <a href="#">
@@ -101,25 +103,31 @@
                 ورود و عضویت
             </a> -->
                     <a href="#">
-                        جلال بهرامی راد
+                        @auth()
+                            {{ auth()->user()->name }}
+                        @endauth
+                        @guest
+                            ثبت نام یا ورود
+                        @endguest
                         <i class="fad fa-chevron-down text-sm mr-1"></i>
                     </a>
                     <ul class="dropdown--wrapper">
-                        <li class="header-profile-dropdown-account-container">
-                            <a href="#" class="d-block">
+                        @auth
+                            <li class="header-profile-dropdown-account-container">
+                                <a href="#" class="d-block">
                                         <span class="header-profile-dropdown-user">
                                             <span class="header-profile-dropdown-user-img">
-                                                <img src="{{url('frontend')}}/images/avatar/avatar.png">
+                                                <img src="{{url('frontend/images/avatar/avatar.png')}}">
                                             </span>
                                             <span class="header-profile-dropdown-user-info">
                                                 <p class="header-profile-dropdown-user-name">
-                                                    جلال بهرامی راد
+                                                   {{ auth()->user()->name }}
                                                 </p>
                                                 <span class="header-profile-dropdown-user-profile-link">مشاهده حساب
                                                     کاربری</span>
                                             </span>
                                         </span>
-                                <span class="header-profile-dropdown-account">
+                                    <span class="header-profile-dropdown-account">
                                             <span class="header-profile-dropdown-account-item">
                                                 <span class="header-profile-dropdown-account-item-title">اعتبار</span>
                                                 <span class="header-profile-dropdown-account-item-amount">
@@ -129,26 +137,28 @@
                                                 </span>
                                             </span>
                                         </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown--btn-primary">وارد شوید</a>
-                        </li>
-                        <li>
-                            <span>کاربر جدید هستید؟</span>
-                            <a href="#" class="border-bottom-dt">ثبت نام</a>
-                        </li>
-                        <hr>
-                        <li>
-                            <a href="#">
-                                پروفایل
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                پیگیری سفارش
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    پروفایل
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    پیگیری سفارش
+                                </a>
+                            </li>
+                        @endauth
+                        @guest()
+                            <li>
+                                <a href="{{route('login')}}" class="dropdown--btn-primary">وارد شوید</a>
+                            </li>
+                            <li>
+                                <span>کاربر جدید هستید؟</span>
+                                <a href="{{route('register')}}" class="border-bottom-dt">ثبت نام</a>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>
@@ -177,7 +187,6 @@
                                 </ul>
                             </li>
                         @endforeach
-
 
 
                         <li>
