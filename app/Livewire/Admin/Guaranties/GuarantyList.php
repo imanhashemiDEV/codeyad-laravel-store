@@ -34,8 +34,9 @@ class GuarantyList extends Component
 
     }
 
-    public function editRow($id): void
+    public function editRow(int $id): void
     {
+        $this->resetValidation();
         $this->editIndex = $id;
         $guaranty = Guaranty::query()->findOrFail($id);
         $this->name = $guaranty->name;
@@ -55,7 +56,7 @@ class GuarantyList extends Component
     }
 
     #[Computed()]
-    public function guaranties():Paginator
+    public function guaranties(): Paginator
     {
         return Guaranty::query()->paginate(10);
     }

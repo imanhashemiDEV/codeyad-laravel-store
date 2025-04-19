@@ -9,6 +9,7 @@ use App\Livewire\Admin\Categories\CategoryList;
 use App\Livewire\Admin\Categories\TrashedCategoryList;
 use App\Livewire\Admin\Colors\ColorList;
 use App\Livewire\Admin\Guaranties\GuarantyList;
+use App\Livewire\Admin\Orders\Orders;
 use App\Livewire\Admin\Panel;
 use App\Livewire\Admin\Permissions\PermissionList;
 use App\Livewire\Admin\Products\CreateProduct;
@@ -57,7 +58,8 @@ Route::get('/edit_product_prices/{product_price}', EditProductPrice::class)->nam
 Route::get('/product_properties/{product}', ProductProperties::class)->name('admin.product.properties');
 Route::get('/product_gallery/{product}', ProductGallery::class)->name('admin.product.gallery');
 
-
+//--- guaranties ---//
+Route::get('/admin_orders', Orders::class)->name('admin.orders');
 
 
 Route::get('/new_year_campaign', [CampaignController::class,'newYearNotification'])->name('admin.notification.new_year');
