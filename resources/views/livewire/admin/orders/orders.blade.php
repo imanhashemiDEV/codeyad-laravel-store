@@ -21,6 +21,7 @@
                         <th class="text-center">کد سفارش</th>
                         <th class="text-center"> قیمت کل</th>
                         <th class="text-center">تخفیف </th>
+                        <th class="text-center">جزئیات خرید </th>
                         <th class="text-center">تاریخ ایجاد</th>
                     </tr>
                     </thead>
@@ -32,6 +33,9 @@
                             <td class="whitespace-nowrap">{{$order->order_code}}</td>
                             <td class="whitespace-nowrap">{{$order->total_price}}</td>
                             <td class="whitespace-nowrap">{{$order->total_discount}}</td>
+                            <td class="whitespace-nowrap">
+                                <a href="{{route('admin.order.details',$order->id)}}" class="btn btn-outline-info">جزئیات خرید</a>
+                            </td>
                             <td class="whitespace-nowrap">{{ \Hekmatinasser\Verta\Verta::instance($order->created_at)->formatJalaliDate()}}</td>
 
                         </tr>

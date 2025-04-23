@@ -19,7 +19,7 @@ class Orders extends Component
     {
         return Order::query()
             ->with('user')
-            ->where('status',OrderStatus::Successful->value)
+            ->where('status', OrderStatus::Successful->value)
             ->paginate(10);
     }
 
