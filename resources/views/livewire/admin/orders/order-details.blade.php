@@ -1,9 +1,7 @@
-<div class="grid grid-cols-1 gap-6 p-4">
+<div class="grid grid-cols-1 gap-6 p-4 h-full">
+    @include('admin.layouts.waiting')
     <div class="panel p-5">
         <div class="mb-5">
-
-            @include('admin.layouts.waiting')
-
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -31,7 +29,17 @@
                             <td class="whitespace-nowrap">{{$order->price}}</td>
                             <td class="whitespace-nowrap">{{$order->discount}}</td>
                             <td class="whitespace-nowrap">{{$order->count}}</td>
-                            <td class="whitespace-nowrap">{{$order->status}}</td>
+                            <td class="whitespace-nowrap cursor-pointer" wire:click="changeStatus('{{$order->status}}',{{$order->id}})">
+                                @if($order->status === \App\Enums\OrderDetailStatus::Received->value)
+                                   <span class="badge bg-success">دریافت شد</span>
+                                @elseif($order->status === \App\Enums\OrderDetailStatus::Rejected->value)
+                                    <span class="badge bg-danger">مرجوع شد</span>
+                                @elseif($order->status === \App\Enums\OrderDetailStatus::Send->value)
+                                    <span class="badge bg-info">ارسال شد</span>
+                                @elseif($order->status === \App\Enums\OrderDetailStatus::InProgress->value)
+                                    <span class="badge bg-warning">در حال پردازش</span>
+                                @endif
+                            </td>
                             <td class="whitespace-nowrap">{{ \Hekmatinasser\Verta\Verta::instance($order->created_at)->formatJalaliDate()}}</td>
                         </tr>
                     @endforeach
