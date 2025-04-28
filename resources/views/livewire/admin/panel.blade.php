@@ -106,7 +106,6 @@
         </div>
     </div>
 
-
     <div class="bg-white rounded-md">
         <div class="p-4">
             <div id="apex_chart_one" style="height: 400px"></div>
@@ -173,7 +172,7 @@
             },
             series: [{
                 name: 'تعداد فروش ها',
-                data: [1,2,3,4,5,6,7,8,9,9,9]
+                data: [1,2,3,4,5,6,7,8,9,1,2]
             }],
             xaxis: {
                 categories: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند']
@@ -202,5 +201,7 @@
 
         chart.render();
     }
+
+
 </script>
 @endscript
