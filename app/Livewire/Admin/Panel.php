@@ -19,6 +19,7 @@ class Panel extends Component
     public $send_count=0;
     public $rejected_count=0;
 
+    public $diagram_order=[];
     public function mount(): void
     {
         $this->users_count = User::query()->count();
@@ -36,6 +37,18 @@ class Panel extends Component
                    $this->rejected_count++;
                }
             }
+        }
+
+        $year = verta()->year;
+        $month = verta()->month;
+        for($i=1;$i<=13;$i++){
+            $start_month = verta()->setDateJalali($year, $i, 1)->formatGregorian('Y-n-j');
+            $end_month = verta()->setDateJalali($year, $i, verta()->month($month)->daysInMonth)->formatGregorian('Y-n-j');
+            $this->diagram_order[]= Order::query()
+                ->where('status', OrderStatus::Successful->value)
+                ->whereDate('created_at','>=',$start_month)
+                ->whereDate('created_at','<=',$end_month)
+                ->count();
         }
     }
     #[Layout('admin.master'),Title('پنل مدیریت')]
