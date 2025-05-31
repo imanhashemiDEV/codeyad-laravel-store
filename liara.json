@@ -1,0 +1,17 @@
+{
+    "platform": "laravel",
+    "app": "CodeyadStore",
+    "laravel": {
+        "phpVersion": "8.3"
+    },
+    "disks": [
+        {
+            "name": "data",
+            "mountTo": "public"
+        },
+        {
+            "name": "storage",
+            "mountTo": "storage"
+        }
+    ]
+}
