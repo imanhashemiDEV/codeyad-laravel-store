@@ -249,6 +249,6 @@
         }));
     });
 </script>
-<script src="{{url('build/tailwind/app-BjCBnTiP.js')}}"></script>
+<script src="{{url('tailwind/assets/app-BjCBnTiP.js')}}"></script>
 </body>
 </html>
