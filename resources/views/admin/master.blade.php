@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>  {{$title ?? "پنل مدیریت"}}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="{{url('panel/images/favicon.png')}}" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/perfect-scrollbar.min.css')}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/x-icon" href="{{url('panel/images/favicon.png')}}"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/perfect-scrollbar.min.css')}}"/>
 
-{{--    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}" />--}}
-{{--    <link rel="stylesheet" type="text/css" media="screen" href="{{url('tailwind/assets/app-DL-Qw56t.css')}}" />--}}
-     @vite('resources/css/app.css')
-    @production
-        <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}"
-        <link rel="stylesheet" href="{{url('tailwind/assets/app-CA3lr28Z.css')}}">
-    @endproduction
-    <link defer rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/animate.css')}}" />
+    {{--    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}" />--}}
+    {{--    <link rel="stylesheet" type="text/css" media="screen" href="{{url('tailwind/assets/app-DL-Qw56t.css')}}" />--}}
+{{--    @vite('resources/css/app.css')--}}
+
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}"
+    <link rel="stylesheet" href="{{url('tailwind/assets/app-CA3lr28Z.css')}}">
+
+    <link defer rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/animate.css')}}"/>
     <script src="{{url('panel/js/perfect-scrollbar.min.js')}}"></script>
     <script defer src="{{url('panel/js/popper.min.js')}}"></script>
     <script defer src="{{url('panel/js/tippy-bundle.umd.min.js')}}"></script>
     <script defer src="{{url('panel/js/sweetalert.min.js')}}"></script>
-    <wireui:scripts />
+    <wireui:scripts/>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <x-livewire-alert::scripts />
+    <x-livewire-alert::scripts/>
 </head>
 
 <body
@@ -31,7 +31,8 @@
     :class="  [ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme, $store.app.menu, $store.app.layout,$store.app.rtlClass]"
 >
 <!-- sidebar menu overlay -->
-<div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
+<div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}"
+     @click="$store.app.toggleSidebar()"></div>
 
 <!-- screen loader -->
 @include('admin.layouts.loader')
@@ -248,8 +249,6 @@
         }));
     });
 </script>
-@production
-    <script src="{{url('build/tailwind/app-BjCBnTiP.js')}}"></script>
-@endproduction
+<script src="{{url('build/tailwind/app-BjCBnTiP.js')}}"></script>
 </body>
 </html>
