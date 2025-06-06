@@ -12,6 +12,7 @@
 {{--    <link rel="stylesheet" type="text/css" media="screen" href="{{url('tailwind/assets/app-DL-Qw56t.css')}}" />--}}
      @vite('resources/css/app.css')
     @production
+        <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}"
         <link rel="stylesheet" href="{{url('tailwind/assets/app-CA3lr28Z.css')}}">
     @endproduction
     <link defer rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/animate.css')}}" />
