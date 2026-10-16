@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 gap-6 p-4">
     <div class="panel p-5">
-        <div class="flex">
+        <div class="flex mb-4 gap-2">
             <a href="#" type="button" class="btn btn-danger m-4  w-[300px]">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ltr:mr-1.5 rtl:ml-1.5">
                     <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"></circle>

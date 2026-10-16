@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/perfect-scrollbar.min.css')}}"/>
     {{--    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}" />--}}
     {{--    @vite('resources/css/app.css')--}}
-    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}"
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/style.css')}}">
     <link rel="stylesheet" href="{{url('tailwind/assets/app-CA3lr28Z.css')}}">
 
     <link defer rel="stylesheet" type="text/css" media="screen" href="{{url('panel/css/animate.css')}}"/>
@@ -22,10 +22,9 @@
 <body
     x-data="main"
     class="relative overflow-x-hidden text-sm antialiased font-normal"
-    :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme, $store.app.menu, $store.app.layout,$store.app.rtlClass]"
->
+    :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme, $store.app.menu, $store.app.layout,$store.app.rtlClass]">
 
-@yield('content')
+    @yield('content')
 
 </body>
 </html>

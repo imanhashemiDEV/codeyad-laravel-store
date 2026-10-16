@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "carlos-meneses/laravel-mpdf": "^2.1",
         "hekmatinasser/verta": "^8.4",
         "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^12.0",
