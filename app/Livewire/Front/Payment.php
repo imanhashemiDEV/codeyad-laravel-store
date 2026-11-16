@@ -33,7 +33,8 @@ class Payment extends Component
 
             foreach ($this->order->orderDetails as $detail){
                  $product = $detail->product;
-                $product_price =  $detail->product->productPrices->where('color_id',$detail->color_id)->where('guaranty_id',$detail->guaranty_id)->first();
+                $product_price =  $detail->product->productPrices->where('color_id',$detail->color_id)
+				->where('guaranty_id',$detail->guaranty_id)->first();
 
                 $product->increment('sold', $detail->count);
                 $product_price->increment('sold', $detail->count);
